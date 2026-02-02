@@ -1,2 +1,2 @@
-# indexlucy.html
+# indexlucy
 Lucy Epoxy Studio
