@@ -5,162 +5,200 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zamów projekt | LucyEpoxyStudio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*{margin:0;padding:0;box-sizing:border-box}
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: #050505;
-  color: #f4f4f4;
-  overflow-x: hidden;
+body{
+  font-family:'Inter',sans-serif;
+  background:#050505;
+  color:#fff;
+  overflow-x:hidden;
 }
 
-/* ================= HEADER ================= */
-header {
-  min-height: 50vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* ===== ULTRA LUX PATTERN ===== */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(212,175,55,.04) 0 2px,
+      transparent 2px 40px
+    );
+  opacity:.35;
+  z-index:-2;
+  animation:luxMove 40s linear infinite;
+}
+@keyframes luxMove{
+  to{background-position:400px 400px}
 }
 
-/* ================= KINO ================= */
-#cinema-wrapper {
-  position: relative;
-  padding: 6rem 1rem 8rem;
-  display: flex;
-  justify-content: center;
+/* ===== CINEMA AREA ===== */
+#cinema-wrapper{
+  position:relative;
+  padding:7rem 1rem 8rem;
+  display:flex;
+  justify-content:center;
 }
 
-/* PROJEKTOR */
-#projector {
-  position: absolute;
-  top: -80px;
-  width: 180px;
-  height: 60px;
-  background: linear-gradient(145deg, #1a1a1a, #000);
-  border-radius: 14px;
-  box-shadow: 0 15px 40px rgba(0,0,0,.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #d4af37;
-  letter-spacing: 3px;
-  font-size: .8rem;
-  opacity: 0;
-  animation: projectorIn 1.6s forwards;
+/* ===== CURTAINS ===== */
+.curtain{
+  position:fixed;
+  top:0;
+  width:50%;
+  height:100vh;
+  background:linear-gradient(
+    to right,
+    #2b0000,
+    #6b0000,
+    #2b0000
+  );
+  z-index:20;
+  box-shadow:inset -40px 0 60px rgba(0,0,0,.8);
+}
+#curtain-left{left:0;animation:curtainLeft 2.6s 2.6s forwards}
+#curtain-right{
+  right:0;
+  transform:scaleX(-1);
+  animation:curtainRight 2.6s 2.6s forwards
+}
+@keyframes curtainLeft{to{transform:translateX(-100%)}}
+@keyframes curtainRight{to{transform:translateX(100%) scaleX(-1)}}
+
+/* ===== PROJECTOR ===== */
+#projector{
+  position:absolute;
+  top:-90px;
+  width:200px;
+  height:70px;
+  background:linear-gradient(145deg,#1b1b1b,#000);
+  border-radius:16px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  letter-spacing:4px;
+  color:#d4af37;
+  opacity:0;
+  animation:projectorIn 1.5s forwards;
+  z-index:10;
+}
+#projector::after{
+  content:"";
+  position:absolute;
+  right:16px;
+  width:18px;
+  height:18px;
+  background:radial-gradient(circle,#fff 0%,#d4af37 45%,#000 70%);
+  border-radius:50%;
+}
+@keyframes projectorIn{
+  to{opacity:1;transform:translateY(60px)}
 }
 
-/* SOCZEWKA */
-#projector::after {
-  content: "";
-  position: absolute;
-  right: 14px;
-  width: 18px;
-  height: 18px;
-  background: radial-gradient(circle, #fff 0%, #d4af37 45%, #000 70%);
-  border-radius: 50%;
+/* ===== LIGHT BEAM ===== */
+#beam{
+  position:absolute;
+  top:-10px;
+  width:0;
+  height:0;
+  border-left:300px solid transparent;
+  border-right:300px solid transparent;
+  border-bottom:700px solid rgba(212,175,55,.12);
+  opacity:0;
+  filter:blur(1px);
+  animation:beamOn 1.5s 1.2s forwards;
+  z-index:5;
+}
+@keyframes beamOn{to{opacity:1}}
+
+/* ===== DUST ===== */
+.dust{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:rgba(255,255,255,.4);
+  animation:floatDust linear infinite;
+}
+@keyframes floatDust{
+  from{transform:translateY(0)}
+  to{transform:translateY(600px)}
 }
 
-/* STOŻEK ŚWIATŁA */
-#beam {
-  position: absolute;
-  top: -20px;
-  width: 0;
-  height: 0;
-  border-left: 260px solid transparent;
-  border-right: 260px solid transparent;
-  border-bottom: 620px solid rgba(212,175,55,0.10);
-  opacity: 0;
-  animation: beamOn 2s 1.2s forwards;
-  filter: blur(1px);
+/* ===== SCREEN ===== */
+#cinema{
+  position:relative;
+  width:100%;
+  max-width:900px;
+  padding-bottom:56.25%;
+  background:#000;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 30px 70px rgba(0,0,0,.9);
+  z-index:3;
 }
-
-/* EKRAN */
-#cinema {
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  padding-bottom: 56.25%;
-  background: #000;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 25px 60px rgba(0,0,0,.85);
+#screen{
+  position:absolute;
+  top:-100%;
+  width:100%;
+  height:100%;
+  animation:screenDrop 2s 1.8s forwards;
 }
+@keyframes screenDrop{to{top:0}}
 
-#screen {
-  position: absolute;
-  top: -100%;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: screenDrop 2s 1.8s forwards;
-}
-
-#screen video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ================= ANIMACJE ================= */
-@keyframes projectorIn {
-  from { transform: translateY(-60px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes beamOn {
-  to { opacity: 1; }
-}
-
-@keyframes screenDrop {
-  to { top: 0; }
+#screen video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 </style>
 </head>
 
 <body>
 
-<header></header>
+<div id="curtain-left" class="curtain"></div>
+<div id="curtain-right" class="curtain"></div>
 
 <div id="cinema-wrapper">
   <div id="projector">PROJECTOR</div>
-  <div id="beam"></div>
+  <div id="beam" id="dust-area"></div>
 
   <div id="cinema">
     <div id="screen">
-      <video
-        id="video"
-        src="wideo.mp4"
-        autoplay
-        playsinline
-        loop
-      ></video>
+      <video id="video" src="wideo.mp4" autoplay loop playsinline></video>
     </div>
   </div>
 </div>
 
+<audio id="sound" src="projector.mp3"></audio>
+
 <script>
-window.addEventListener("load", () => {
-  const video = document.getElementById("video");
+/* DUST */
+for(let i=0;i<60;i++){
+  const d=document.createElement("div");
+  d.className="dust";
+  d.style.left=Math.random()*100+"%";
+  d.style.top=Math.random()*-400+"px";
+  d.style.animationDuration=5+Math.random()*8+"s";
+  document.getElementById("beam").appendChild(d);
+}
 
-  // próba wymuszenia dźwięku
-  video.muted = false;
-  const playPromise = video.play();
+/* SOUND + VIDEO */
+window.addEventListener("load",()=>{
+  const video=document.getElementById("video");
+  const sound=document.getElementById("sound");
 
-  if (playPromise !== undefined) {
-    playPromise.catch(() => {
-      // jeśli przeglądarka zablokuje audio – ruszy po pierwszym kliknięciu
-      document.body.addEventListener("click", () => {
-        video.muted = false;
-        video.play();
-      }, { once: true });
-    });
-  }
+  sound.play().catch(()=>{});
+  video.muted=false;
+  video.play().catch(()=>{
+    document.body.addEventListener("click",()=>{
+      video.muted=false;
+      video.play();
+      sound.play();
+    },{once:true});
+  });
 });
 </script>
 
