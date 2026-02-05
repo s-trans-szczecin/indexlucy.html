@@ -58,21 +58,23 @@ body::after {
   justify-content:center;
   z-index:9999;
   animation:introFade 4.5s ease forwards;
+  overflow:visible; /* poprawka – litery nie ucina */
 }
 
 .logo3d{
   font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,6vw,4rem); /* zmniejszone min rozmiaru */
-  letter-spacing:2px;
-  padding:.6em .9em;
+  font-size:clamp(2rem,6vw,4rem);
+  letter-spacing:1.5px;
+  display:inline-block;
   color:#d4af37;
   text-shadow:
     0 2px 0 #b08d2f,
     0 10px 30px rgba(212,175,55,.7),
     0 30px 80px rgba(0,0,0,.9);
   animation:logoReveal 2.6s ease forwards;
-  word-break: break-word; /* nie ucina litery na małych ekranach */
+  white-space:nowrap; /* logo w jednej linii */
   text-align:center;
+  padding:0; /* usuwa ucianie liter */
 }
 
 .logo3d span{
@@ -114,6 +116,7 @@ header::before{
 header h1{
   font-family:'Playfair Display',serif;
   font-size:clamp(3rem,6vw,4.5rem);
+  white-space:nowrap; /* poprawka – litery nie ucina */
 }
 
 header h1 span{
@@ -244,6 +247,14 @@ footer{
   padding:3rem 1rem;
   color:#777;
   font-size:.9rem;
+}
+
+/* ===== MEDIA QUERIES ===== */
+@media(max-width:480px){
+  .logo3d{
+    font-size:clamp(1.6rem,8vw,3rem);
+    letter-spacing:1px;
+  }
 }
 </style>
 </head>
