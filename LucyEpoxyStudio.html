@@ -25,18 +25,10 @@ body::before{
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:0; /* pattern pod wszystkimi elementami */
+  z-index:0;
   background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(212,175,55,.06) 0 2px,
-      transparent 2px 30px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(212,175,55,.04) 0 2px,
-      transparent 2px 30px
-    );
+    repeating-linear-gradient(90deg, rgba(212,175,55,.06) 0 2px, transparent 2px 30px),
+    repeating-linear-gradient(0deg, rgba(212,175,55,.04) 0 2px, transparent 2px 30px);
   opacity:.25;
 }
 
@@ -46,17 +38,11 @@ body::after {
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:1; /* nad patternem, pod treścią */
-  background: linear-gradient(
-    120deg,
-    rgba(212,175,55,0) 0%,
-    rgba(212,175,55,0.08) 50%,
-    rgba(212,175,55,0) 100%
-  );
+  z-index:1;
+  background: linear-gradient(120deg, rgba(212,175,55,0) 0%, rgba(212,175,55,0.08) 50%, rgba(212,175,55,0) 100%);
   transform: translateX(-100%);
   animation: lightSweep 12s linear infinite;
 }
-
 @keyframes lightSweep {
   0% { transform: translateX(-100%) skewX(-25deg); }
   100% { transform: translateX(200%) skewX(-25deg); }
@@ -76,7 +62,7 @@ body::after {
 
 .logo3d{
   font-family:'Playfair Display',serif;
-  font-size:clamp(2.5rem,6vw,4rem);
+  font-size:clamp(2rem,6vw,4rem); /* zmniejszone min rozmiaru */
   letter-spacing:2px;
   padding:.6em .9em;
   color:#d4af37;
@@ -85,6 +71,8 @@ body::after {
     0 10px 30px rgba(212,175,55,.7),
     0 30px 80px rgba(0,0,0,.9);
   animation:logoReveal 2.6s ease forwards;
+  word-break: break-word; /* nie ucina litery na małych ekranach */
+  text-align:center;
 }
 
 .logo3d span{
@@ -119,10 +107,7 @@ header::before{
   content:"";
   position:absolute;
   inset:0;
-  background:radial-gradient(circle at top,
-    rgba(255,255,255,.1),
-    rgba(212,175,55,.25),
-    rgba(0,0,0,.7));
+  background:radial-gradient(circle at top, rgba(255,255,255,.1), rgba(212,175,55,.25), rgba(0,0,0,.7));
   z-index:-1;
 }
 
@@ -212,11 +197,7 @@ section{padding:7rem 10%}
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    180deg,
-    rgba(0,0,0,.35),
-    rgba(0,0,0,.85)
-  );
+  background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.85));
 }
 
 .card-content{
@@ -325,6 +306,11 @@ footer{
     <div class="gallery-item" style="background-image:url('projekt2.jpg')"></div>
     <div class="gallery-item" style="background-image:url('projekt3.jpg')"></div>
     <div class="gallery-item" style="background-image:url('projekt4.jpg')"></div>
+    <div class="gallery-item" style="background-image:url('foto1.jpg')"></div>
+    <div class="gallery-item" style="background-image:url('foto2.jpg')"></div>
+    <div class="gallery-item" style="background-image:url('foto3.jpg')"></div>
+    <div class="gallery-item" style="background-image:url('foto4.jpg')"></div>
+    <div class="gallery-item" style="background-image:url('foto5.jpg')"></div>
   </div>
 </section>
 
