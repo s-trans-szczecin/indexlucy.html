@@ -4,8 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pobierz aplikację | LucyEpoxyStudio</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
+
 body{
   font-family:'Inter',sans-serif;
   background:#050505;
@@ -14,45 +18,48 @@ body{
   overflow-x:hidden;
   position:relative;
 }
-body::before{
+
+/* ================= ANIMOWANY WZÓR GRECKI TŁA ================= */
+body::before {
   content:"";
   position:fixed;
   inset:0;
-  pointer-events:none;
   z-index:0;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(212,175,55,.06) 0 2px,
-      transparent 2px 30px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(212,175,55,.04) 0 2px,
-      transparent 2px 30px
-    );
-  opacity:.25;
+  pointer-events:none;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(212,175,55,0.06) 0 2px, transparent 2px 30px),
+    repeating-linear-gradient(0deg, rgba(212,175,55,0.04) 0 2px, transparent 2px 30px);
+  background-size: 200px 200px;
+  opacity:0.25;
+  animation: movePattern 30s linear infinite alternate;
 }
+
+@keyframes movePattern {
+  0% { background-position: 0 0, 0 0; }
+  25% { background-position: 50px 100px, 100px 50px; }
+  50% { background-position: 100px 50px, 50px 100px; }
+  75% { background-position: 50px 0, 0 50px; }
+  100% { background-position: 0 0, 0 0; }
+}
+
+/* ================= LIGHT SWEEP ================= */
 body::after {
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
   z-index:1;
-  background: linear-gradient(
-    120deg,
-    rgba(212,175,55,0) 0%,
-    rgba(212,175,55,0.08) 50%,
-    rgba(212,175,55,0) 100%
-  );
+  background: linear-gradient(120deg, rgba(212,175,55,0) 0%, rgba(212,175,55,0.08) 50%, rgba(212,175,55,0) 100%);
   transform: translateX(-100%);
   animation: lightSweep 12s linear infinite;
 }
-@keyframes lightSweep {
+
+@keyframes lightSweep{
   0% { transform: translateX(-100%) skewX(-25deg); }
   100% { transform: translateX(200%) skewX(-25deg); }
 }
 
+/* Header */
 header{
   min-height:60vh;
   display:flex;
@@ -74,6 +81,8 @@ header p{
   font-size:1.1rem;
   color:#e0e0e0;
 }
+
+/* CTA */
 .cta{
   margin-top:2rem;
   padding:1rem 2.8rem;
@@ -90,6 +99,8 @@ header p{
   transform:translateY(-4px);
   box-shadow:0 25px 50px rgba(212,175,55,.4);
 }
+
+/* Sekcja treści */
 section{
   padding:5rem 10%;
   max-width:800px;
@@ -107,6 +118,8 @@ p{
   font-size:1.15rem;
   color:#e0e0e0;
 }
+
+/* Stopka */
 footer{
   text-align:center;
   padding:3rem 1rem;
@@ -115,11 +128,18 @@ footer{
 }
 </style>
 </head>
+
 <body>
+
 <header>
   <h1>Pobierz aplikację LucyEpoxyStudio</h1>
   <p>Aplikacja dostępna na Androida. Dzięki niej zawsze będziesz na bieżąco z nowymi projektami i ekskluzywnymi ofertami.</p>
-  <button class="cta" onclick="window.location.href='https://play.google.com/store/apps/details?id=TwojaAppID'">Pobierz na Androida</button>
+
+  <!-- Kontener na przyciski -->
+  <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+    <button class="cta" onclick="window.location.href='https://s-trans-szczecin.github.io/indexlucy.html/LucyEpoxyStudio.html'">Strona główna</button>
+    <button class="cta" onclick="window.location.href='https://play.google.com/store/apps/details?id=TwojaAppID'">Pobierz na Androida</button>
+  </div>
 </header>
 
 <section>
@@ -132,5 +152,6 @@ footer{
 <footer>
 © LucyEpoxyStudio · Ultra-Lux Design · Ręcznie · Unikatowo
 </footer>
+
 </body>
 </html>
