@@ -8,16 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}<!DOCTYPE html>
-<html lang="pl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zamów projekt | LucyEpoxyStudio</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
 *{box-sizing:border-box;margin:0;padding:0}
 
 body{
@@ -25,38 +15,20 @@ body{
   background:#050505;
   color:#f4f4f4;
   overflow-x:hidden;
-  position:relative;
 }
 
-/* ===== LUX PATTERN ===== */
+/* LUX GRID */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  z-index:0;
   pointer-events:none;
   background:
-    repeating-linear-gradient(90deg, rgba(212,175,55,.06) 0 2px, transparent 2px 30px),
+    repeating-linear-gradient(90deg, rgba(212,175,55,.05) 0 2px, transparent 2px 30px),
     repeating-linear-gradient(0deg, rgba(212,175,55,.04) 0 2px, transparent 2px 30px);
-  opacity:.25;
 }
 
-/* ===== LIGHT SWEEP ===== */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:linear-gradient(120deg, rgba(212,175,55,0), rgba(212,175,55,.08), rgba(212,175,55,0));
-  animation:lightSweep 12s linear infinite;
-}
-@keyframes lightSweep{
-  from{transform:translateX(-100%) skewX(-25deg)}
-  to{transform:translateX(200%) skewX(-25deg)}
-}
-
-/* ===== HOME BUTTON ===== */
+/* HOME BUTTON */
 .home-btn{
   position:fixed;
   top:20px;
@@ -69,16 +41,12 @@ body::after{
   color:#f5e6b8;
   background:rgba(0,0,0,.6);
   border:1px solid rgba(212,175,55,.6);
-  backdrop-filter:blur(6px);
-  transition:.3s;
 }
 .home-btn:hover{
   background:rgba(212,175,55,.25);
-  box-shadow:0 10px 30px rgba(212,175,55,.5);
-  transform:translateY(-2px);
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header{
   min-height:60vh;
   display:flex;
@@ -87,43 +55,22 @@ header{
   align-items:center;
   text-align:center;
   padding:4rem 2rem;
-  position:relative;
-  z-index:2;
 }
 header h1{
   font-family:'Playfair Display',serif;
-  font-size:clamp(2.5rem,6vw,3.5rem);
+  font-size:3rem;
   color:#f5e6b8;
 }
 header p{
   max-width:760px;
-  margin-top:1.2rem;
-  font-size:1.1rem;
-  color:#e0e0e0;
-}
-.cta{
-  margin-top:2rem;
-  padding:1rem 2.8rem;
-  border-radius:50px;
-  border:1px solid rgba(212,175,55,.6);
-  background:rgba(255,255,255,.06);
-  color:#f5e6b8;
-  cursor:pointer;
-  transition:.4s;
-}
-.cta:hover{
-  background:rgba(212,175,55,.25);
-  transform:translateY(-4px);
-  box-shadow:0 25px 50px rgba(212,175,55,.4);
+  margin-top:1rem;
 }
 
-/* ===== CINEMA ===== */
+/* CINEMA */
 section{
   padding:5rem 10%;
   max-width:1100px;
   margin:auto;
-  position:relative;
-  z-index:2;
 }
 #cinema{
   position:relative;
@@ -133,37 +80,36 @@ section{
   background:#000;
   border-radius:22px;
   overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,.8);
 }
 
-/* ===== PROJECTOR IMAGE ===== */
+/* PROJECTOR */
 #projector{
   position:absolute;
   top:-160px;
   left:50%;
   transform:translateX(-50%);
   width:180px;
-  z-index:6;
-  animation:projectorDrop 1s ease forwards;
+  animation:drop 1s ease forwards;
+  z-index:5;
 }
-@keyframes projectorDrop{
+@keyframes drop{
   to{top:-20px}
 }
 #projector img{
   width:100%;
-  height:auto;
+  display:block;
   filter:drop-shadow(0 20px 40px rgba(212,175,55,.6));
 }
 
-/* ===== SCREEN ===== */
+/* SCREEN */
 #screen{
   position:absolute;
   inset:0;
   transform:translateY(-100%);
-  animation:screenDrop 1.2s ease forwards;
+  animation:screen 1.2s ease forwards;
   animation-delay:1s;
 }
-@keyframes screenDrop{
+@keyframes screen{
   to{transform:translateY(0)}
 }
 #screen video{
@@ -173,24 +119,20 @@ section{
   background:#000;
 }
 
-/* ===== TEXT ===== */
+/* TEXT */
 .section-title{
   font-family:'Playfair Display',serif;
-  font-size:2.5rem;
+  font-size:2.3rem;
   text-align:center;
+  margin:3rem 0 1rem;
   color:#f5e6b8;
-  margin:3rem 0 1.5rem;
 }
-p{
-  text-align:center;
-  font-size:1.15rem;
-  color:#e0e0e0;
-}
+p{text-align:center}
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{
   text-align:center;
-  padding:3rem 1rem;
+  padding:3rem;
   color:#777;
 }
 </style>
@@ -198,280 +140,37 @@ footer{
 
 <body>
 
-<a href="https://s-trans-szczecin.github.io/indexlucy.html/LucyEpoxyStudio.html" class="home-btn">
-  ⬅ Strona główna
+<a class="home-btn" href="https://s-trans-szczecin.github.io/indexlucy.html/LucyEpoxyStudio.html">
+⬅ Strona główna
 </a>
 
 <header>
   <h1>Zamów projekt</h1>
   <p>Unikatowe formy, rzemiosło i design klasy galerii sztuki.</p>
-  <button class="cta" onclick="location.href='android-download.html'">Pobierz na Androida</button>
 </header>
 
 <section>
-  <h2 class="section-title">Zobacz naszą pracę</h2>
 
-  <div id="cinema">
-    <div id="projector">
-      <img src="projector.png" alt="Projektor">
-    </div>
+<h2 class="section-title">Zobacz naszą pracę</h2>
 
-    <div id="screen">
-      <video id="film" src="wideo.mp4" autoplay loop playsinline></video>
-    </div>
+<div id="cinema">
+  <div id="projector">
+    <img src="projector.png" alt="Projektor">
   </div>
 
-  <h2 class="section-title">Limitowane formy</h2>
-  <p>Każdy projekt powstaje jako unikat – bez kompromisów.</p>
+  <div id="screen">
+    <video src="wideo.mp4" autoplay loop muted playsinline></video>
+  </div>
+</div>
 
-  <h2 class="section-title">Rzemiosło & precyzja</h2>
-  <p>Ręczna selekcja materiałów i perfekcyjne wykończenie.</p>
+<h2 class="section-title">Limitowane formy</h2>
+<p>Każdy projekt powstaje jako unikat – bez kompromisów.</p>
 
-  <h2 class="section-title">Design ultra-lux</h2>
-  <p>Produkty klasy luksusowych wnętrz i galerii sztuki.</p>
 </section>
 
 <footer>
-© LucyEpoxyStudio · Ultra-Lux Design · Ręcznie · Unikatowo
+© LucyEpoxyStudio · Ultra-Lux Design
 </footer>
-
-<script>
-window.addEventListener('load',()=>{
-  const video=document.getElementById('film');
-  setTimeout(()=>{
-    video.muted=false;
-    video.play().catch(()=>{});
-  },1000);
-});
-</script>
-
-</body>
-</html>
-
-body{
-  font-family:'Inter',sans-serif;
-  background:#050505;
-  color:#f4f4f4;
-  overflow-x:hidden;
-  position:relative;
-}
-
-/* ===== LUX PATTERN ===== */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  background:
-    repeating-linear-gradient(90deg, rgba(212,175,55,.06) 0 2px, transparent 2px 30px),
-    repeating-linear-gradient(0deg, rgba(212,175,55,.04) 0 2px, transparent 2px 30px);
-  opacity:.25;
-}
-
-/* ===== LIGHT SWEEP ===== */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:linear-gradient(120deg, rgba(212,175,55,0), rgba(212,175,55,.08), rgba(212,175,55,0));
-  animation:lightSweep 12s linear infinite;
-}
-@keyframes lightSweep{
-  from{transform:translateX(-100%) skewX(-25deg)}
-  to{transform:translateX(200%) skewX(-25deg)}
-}
-
-/* ===== HOME BUTTON ===== */
-.home-btn{
-  position:fixed;
-  top:20px;
-  left:20px;
-  z-index:999;
-  padding:.6rem 1.4rem;
-  border-radius:40px;
-  font-size:.9rem;
-  text-decoration:none;
-  color:#f5e6b8;
-  background:rgba(0,0,0,.6);
-  border:1px solid rgba(212,175,55,.6);
-  backdrop-filter:blur(6px);
-  transition:.3s;
-}
-.home-btn:hover{
-  background:rgba(212,175,55,.25);
-  box-shadow:0 10px 30px rgba(212,175,55,.5);
-  transform:translateY(-2px);
-}
-
-/* ===== HEADER ===== */
-header{
-  min-height:60vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:4rem 2rem;
-  position:relative;
-  z-index:2;
-}
-header h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.5rem,6vw,3.5rem);
-  color:#f5e6b8;
-}
-header p{
-  max-width:760px;
-  margin-top:1.2rem;
-  font-size:1.1rem;
-  color:#e0e0e0;
-}
-.cta{
-  margin-top:2rem;
-  padding:1rem 2.8rem;
-  border-radius:50px;
-  border:1px solid rgba(212,175,55,.6);
-  background:rgba(255,255,255,.06);
-  color:#f5e6b8;
-  cursor:pointer;
-  transition:.4s;
-}
-.cta:hover{
-  background:rgba(212,175,55,.25);
-  transform:translateY(-4px);
-  box-shadow:0 25px 50px rgba(212,175,55,.4);
-}
-
-/* ===== CINEMA ===== */
-section{
-  padding:5rem 10%;
-  max-width:1100px;
-  margin:auto;
-  position:relative;
-  z-index:2;
-}
-#cinema{
-  position:relative;
-  max-width:900px;
-  margin:4rem auto;
-  padding-bottom:56.25%;
-  background:#000;
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,.8);
-}
-
-/* ===== PROJECTOR IMAGE ===== */
-#projector{
-  position:absolute;
-  top:-160px;
-  left:50%;
-  transform:translateX(-50%);
-  width:180px;
-  z-index:6;
-  animation:projectorDrop 1s ease forwards;
-}
-@keyframes projectorDrop{
-  to{top:-20px}
-}
-#projector img{
-  width:100%;
-  height:auto;
-  filter:drop-shadow(0 20px 40px rgba(212,175,55,.6));
-}
-
-/* ===== SCREEN ===== */
-#screen{
-  position:absolute;
-  inset:0;
-  transform:translateY(-100%);
-  animation:screenDrop 1.2s ease forwards;
-  animation-delay:1s;
-}
-@keyframes screenDrop{
-  to{transform:translateY(0)}
-}
-#screen video{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  background:#000;
-}
-
-/* ===== TEXT ===== */
-.section-title{
-  font-family:'Playfair Display',serif;
-  font-size:2.5rem;
-  text-align:center;
-  color:#f5e6b8;
-  margin:3rem 0 1.5rem;
-}
-p{
-  text-align:center;
-  font-size:1.15rem;
-  color:#e0e0e0;
-}
-
-/* ===== FOOTER ===== */
-footer{
-  text-align:center;
-  padding:3rem 1rem;
-  color:#777;
-}
-</style>
-</head>
-
-<body>
-
-<a href="https://s-trans-szczecin.github.io/indexlucy.html/LucyEpoxyStudio.html" class="home-btn">
-  ⬅ Strona główna
-</a>
-
-<header>
-  <h1>Zamów projekt</h1>
-  <p>Unikatowe formy, rzemiosło i design klasy galerii sztuki.</p>
-  <button class="cta" onclick="location.href='android-download.html'">Pobierz na Androida</button>
-</header>
-
-<section>
-  <h2 class="section-title">Zobacz naszą pracę</h2>
-
-  <div id="cinema">
-    <div id="projector">
-      <img src="projector.png" alt="Projektor">
-    </div>
-
-    <div id="screen">
-      <video id="film" src="wideo.mp4" autoplay loop playsinline></video>
-    </div>
-  </div>
-
-  <h2 class="section-title">Limitowane formy</h2>
-  <p>Każdy projekt powstaje jako unikat – bez kompromisów.</p>
-
-  <h2 class="section-title">Rzemiosło & precyzja</h2>
-  <p>Ręczna selekcja materiałów i perfekcyjne wykończenie.</p>
-
-  <h2 class="section-title">Design ultra-lux</h2>
-  <p>Produkty klasy luksusowych wnętrz i galerii sztuki.</p>
-</section>
-
-<footer>
-© LucyEpoxyStudio · Ultra-Lux Design · Ręcznie · Unikatowo
-</footer>
-
-<script>
-window.addEventListener('load',()=>{
-  const video=document.getElementById('film');
-  setTimeout(()=>{
-    video.muted=false;
-    video.play().catch(()=>{});
-  },1000);
-});
-</script>
 
 </body>
 </html>
