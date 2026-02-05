@@ -128,11 +128,11 @@ header p {
   overflow: hidden;
 }
 
-/* iframe film */
-#screen iframe {
+#screen video {
   width: 100%;
   height: 100%;
-  border: none;
+  object-fit: cover;
+  border-radius: 20px;
 }
 
 /* Animacja zjazdu ekranu */
@@ -194,11 +194,14 @@ footer {
   <!-- Kino -->
   <div id="cinema">
     <div id="screen">
-      <iframe 
-        src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen
-      ></iframe>
+      <video 
+        id="projector-video"
+        src="wideo.mp4" 
+        muted 
+        autoplay 
+        loop 
+        playsinline
+      ></video>
     </div>
   </div>
 
@@ -217,10 +220,18 @@ footer {
 </footer>
 
 <script>
-// Animacja ekranu
+// Animacja zjazdu ekranu i odtwarzanie wideo
 window.addEventListener('DOMContentLoaded', () => {
   const screen = document.getElementById('screen');
+  const video = document.getElementById('projector-video');
+
+  // Dodaj animację zjazdu ekranu
   screen.classList.add('drop-screen');
+
+  // Po zakończeniu animacji odtwórz wideo
+  screen.addEventListener('animationend', () => {
+    video.play().catch(e => console.log('Nie udało się odtworzyć wideo:', e));
+  });
 });
 </script>
 
