@@ -18,7 +18,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= INTRO + LOGO ================= */
+/* ================= INTRO ================= */
 #intro{
   position:fixed;
   inset:0;
@@ -50,82 +50,13 @@ body{
 }
 
 @keyframes logoReveal{
-  0%{
-    opacity:0;
-    transform:perspective(800px) rotateX(45deg) rotateY(-25deg) scale(.5);
-    filter:blur(6px);
-  }
-  60%{
-    opacity:1;
-    transform:perspective(800px) rotateX(0) rotateY(0) scale(1.08);
-    filter:blur(0);
-  }
-  100%{
-    opacity:1;
-    transform:perspective(800px) rotateX(0) rotateY(0) scale(1);
-  }
+  0%{opacity:0;transform:scale(.6);filter:blur(6px)}
+  100%{opacity:1;transform:scale(1);filter:blur(0)}
 }
 
 @keyframes introFade{
   0%,80%{opacity:1}
   100%{opacity:0;visibility:hidden}
-}
-
-@media(max-width:480px){
-  .logo3d{
-    font-size:2.2rem;
-    animation:logoRevealMobile 2.2s ease forwards;
-  }
-  @keyframes logoRevealMobile{
-    from{opacity:0;transform:scale(.6)}
-    to{opacity:1;transform:scale(1)}
-  }
-}
-
-/* ================= MARBLE PILLARS ================= */
-.pillars{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-}
-
-.pillar{
-  position:absolute;
-  top:0;
-  width:260px;
-  height:100vh;
-  opacity:.18;
-  background:
-    linear-gradient(120deg,
-      #ffffff,
-      #eaeaea,
-      #f7f7f7,
-      #dcdcdc,
-      #ffffff);
-  background-size:400% 400%;
-  filter:blur(.5px);
-  animation:
-    marbleMove 16s ease-in-out infinite,
-    pillarRotate 40s linear infinite;
-}
-
-.pillar.left{left:-130px}
-.pillar.right{right:-130px;animation-direction:reverse}
-
-@keyframes marbleMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-@keyframes pillarRotate{
-  from{transform:rotateY(0deg)}
-  to{transform:rotateY(360deg)}
-}
-
-@media(max-width:768px){
-  .pillars{display:none}
 }
 
 /* ================= HERO ================= */
@@ -147,8 +78,8 @@ header::before{
   background:radial-gradient(circle at top,
     rgba(255,255,255,.1),
     rgba(212,175,55,.25),
-    rgba(0,0,0,.6));
-  z-index:-2;
+    rgba(0,0,0,.7));
+  z-index:-1;
 }
 
 header h1{
@@ -205,9 +136,11 @@ section{padding:7rem 10%}
 }
 
 .card{
+  position:relative;
   background:rgba(255,255,255,.05);
-  padding:2.8rem;
+  padding:3rem;
   border-radius:26px;
+  overflow:hidden;
   backdrop-filter:blur(18px);
   box-shadow:0 40px 80px rgba(0,0,0,.6);
   transition:.5s;
@@ -216,6 +149,45 @@ section{padding:7rem 10%}
 .card:hover{
   transform:translateY(-10px);
   box-shadow:0 50px 100px rgba(212,175,55,.35);
+}
+
+.card-bg{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:.18;
+  filter:blur(1px) saturate(1.2);
+  transform:scale(1.1);
+  transition:.6s ease;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,.35),
+    rgba(0,0,0,.85)
+  );
+}
+
+.card-content{
+  position:relative;
+  z-index:2;
+}
+
+.card:hover .card-bg{
+  opacity:.35;
+  transform:scale(1.2);
+}
+
+.icon{
+  font-size:2.6rem;
+  margin-bottom:1.4rem;
+  color:#d4af37;
+  text-shadow:0 12px 30px rgba(212,175,55,.6);
 }
 
 /* ================= GALLERY ================= */
@@ -255,11 +227,6 @@ footer{
   <div class="logo3d">Lucy<span>Epoxy</span>Studio</div>
 </div>
 
-<div class="pillars">
-  <div class="pillar left"></div>
-  <div class="pillar right"></div>
-</div>
-
 <header>
   <h1><span>Lucy</span>EpoxyStudio</h1>
   <p>Ultra-lux meble i formy z żywicy epoksydowej. Ręcznie tworzone dzieła, które definiują przestrzeń.</p>
@@ -268,19 +235,36 @@ footer{
 
 <section>
   <h2 class="section-title">Dlaczego LucyEpoxyStudio</h2>
+
   <div class="values-grid">
+
     <div class="card">
-      <h3>Limitowane formy</h3>
-      <p>Każdy projekt powstaje jako unikat – bez powtórzeń i kompromisów.</p>
+      <div class="card-bg" style="background-image:url('unikat.jpg')"></div>
+      <div class="card-content">
+        <div class="icon">✦</div>
+        <h3>Limitowane formy</h3>
+        <p>Każdy projekt powstaje jako unikat – bez powtórzeń i kompromisów.</p>
+      </div>
     </div>
+
     <div class="card">
-      <h3>Rzemiosło & precyzja</h3>
-      <p>Ręczna selekcja drewna, perfekcyjne wykończenie i dbałość o detal.</p>
+      <div class="card-bg" style="background-image:url('rzemioslo.jpg')"></div>
+      <div class="card-content">
+        <div class="icon">⌂</div>
+        <h3>Rzemiosło & precyzja</h3>
+        <p>Ręczna selekcja drewna, perfekcyjne wykończenie i dbałość o detal.</p>
+      </div>
     </div>
+
     <div class="card">
-      <h3>Design ultra-lux</h3>
-      <p>Produkty klasy galerii sztuki i luksusowych wnętrz.</p>
+      <div class="card-bg" style="background-image:url('design.jpg')"></div>
+      <div class="card-content">
+        <div class="icon">◈</div>
+        <h3>Design ultra-lux</h3>
+        <p>Produkty klasy galerii sztuki i luksusowych wnętrz.</p>
+      </div>
     </div>
+
   </div>
 </section>
 
