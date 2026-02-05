@@ -16,6 +16,30 @@ body{
   color:#f4f4f4;
   line-height:1.7;
   overflow-x:hidden;
+  position:relative;
+}
+
+/* ================= LUXURY PATTERN GRECKI ================= */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(212,175,55,.06) 0 2px,
+      transparent 2px 30px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(212,175,55,.04) 0 2px,
+      transparent 2px 30px
+    );
+
+  opacity:.25;
 }
 
 /* ================= INTRO ================= */
