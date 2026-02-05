@@ -156,27 +156,26 @@ section{
 /* PLAY BUTTON */
 #playBtn{
   position:absolute;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
   font-family:'Playfair Display',serif;
   font-size:2.5rem;
   color:#d4af37;
   cursor:pointer;
   z-index:20;
   background:rgba(0,0,0,0.3);
+  padding:1rem 1.5rem;
   border-radius:20px;
-  transition:all .3s ease;
   animation:pulse 1.5s infinite;
   user-select:none;
 }
 #playBtn:hover{
-  transform:scale(1.05);
+  transform:translate(-50%,-50%) scale(1.05);
 }
 @keyframes pulse{
-  0%,100%{transform:scale(1);opacity:1;}
-  50%{transform:scale(1.1);opacity:.8;}
+  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1;}
+  50%{transform:translate(-50%,-50%) scale(1.1);opacity:.8;}
 }
 
 /* FEATURES / OPIS */
@@ -256,7 +255,7 @@ To nie jest wizualizacja — to realna projekcja fragmentu naszej realizacji.
 <div class="cinema-row">
 
   <div id="cinema">
-    <video id="film" src="wideo.mp4" loop playsinline></video>
+    <video id="film" src="wideo.mp4" muted loop playsinline></video>
     <div id="grain"></div>
     <div id="playBtn">▶</div>
   </div>
@@ -315,19 +314,12 @@ window.addEventListener('load',()=> {
   document.body.classList.add('loaded');
 });
 
-/* START PO KLIKNIECIU PLAY */
-playBtn.addEventListener('click',async()=>{
-  try{
-    if(video.requestFullscreen){
-      await video.requestFullscreen();
-    } else if(video.webkitEnterFullscreen){ 
-      await video.webkitEnterFullscreen(); 
-    }
-    video.muted = false;
-    video.volume = slider.value;
-    await video.play();
-    playBtn.style.display='none';
-  }catch(e){}
+/* PLAY BUTTON */
+playBtn.addEventListener('click',()=>{
+  video.muted = false;
+  video.volume = slider.value;
+  video.play().catch(()=>{});
+  playBtn.style.display='none';
 });
 
 /* SLIDER GŁOŚNOŚCI */
@@ -348,7 +340,7 @@ setInterval(()=>{
     let sum=0, sumSq=0;
     for(let i=0;i<data.length;i+=4){
       const lum = (data[i]+data[i+1]+data[i+2])/3;
-      sum += lum; 
+      sum += lum;
       sumSq += lum*lum;
     }
     const mean = sum/(data.length/4);
