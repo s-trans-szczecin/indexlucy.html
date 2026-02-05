@@ -121,18 +121,18 @@ header p {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #000;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
+  overflow: hidden;
 }
 
-#screen video {
+/* iframe film */
+#screen iframe {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
+  border: none;
 }
 
 /* Animacja zjazdu ekranu */
@@ -194,13 +194,11 @@ footer {
   <!-- Kino -->
   <div id="cinema">
     <div id="screen">
-      <video 
-        id="projector-video"
-        src="https://video.pictory.ai/v2/preview/202602042034390584ab9a15dc5ef420fae6079ad9e71e752" 
-        muted 
-        loop 
-        playsinline
-      ></video>
+      <iframe 
+        src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID" 
+        allow="autoplay; fullscreen" 
+        allowfullscreen
+      ></iframe>
     </div>
   </div>
 
@@ -219,19 +217,10 @@ footer {
 </footer>
 
 <script>
-// Funkcja uruchamiająca animację i film
+// Animacja ekranu
 window.addEventListener('DOMContentLoaded', () => {
   const screen = document.getElementById('screen');
-  const video = document.getElementById('projector-video');
-
-  // dodaj klasę z animacją
   screen.classList.add('drop-screen');
-
-  // po zakończeniu animacji zjazdu ekranu
-  screen.addEventListener('animationend', () => {
-    // odtwórz filmik
-    video.play().catch(e => console.log('Nie udało się odtworzyć wideo:', e));
-  });
 });
 </script>
 
