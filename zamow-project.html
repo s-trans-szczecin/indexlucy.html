@@ -17,7 +17,7 @@ body{
   overflow-x:hidden;
 }
 
-/* LUX GRID */
+/* GRID */
 body::before{
   content:"";
   position:fixed;
@@ -28,7 +28,7 @@ body::before{
     repeating-linear-gradient(0deg, rgba(212,175,55,.04) 0 2px, transparent 2px 30px);
 }
 
-/* HOME BUTTON */
+/* HOME */
 .home-btn{
   position:fixed;
   top:20px;
@@ -42,7 +42,6 @@ body::before{
   background:rgba(0,0,0,.6);
   border:1px solid rgba(212,175,55,.6);
 }
-.home-btn:hover{background:rgba(212,175,55,.25)}
 
 /* HEADER */
 header{
@@ -59,84 +58,75 @@ header h1{
   font-size:3rem;
   color:#f5e6b8;
 }
-header p{
-  max-width:760px;
-  margin-top:1rem;
-}
 
 /* SECTION */
 section{
-  padding:4rem 10%;
-  max-width:1200px;
+  padding:4rem 8%;
+  max-width:1400px;
   margin:auto;
 }
 
 /* INFO */
 .pre-info{
   text-align:center;
-  font-size:1.1rem;
+  font-size:1.15rem;
+  margin-bottom:2.5rem;
   color:#e0e0e0;
-  margin-bottom:2rem;
 }
 
-/* CINEMA LAYOUT */
-.cinema-wrap{
-  position:relative;
-  display:flex;
+/* CINEMA ROW */
+.cinema-row{
+  display:grid;
+  grid-template-columns: 1fr 220px;
+  gap:3rem;
   align-items:center;
-  gap:2rem;
+  position:relative;
 }
 
 /* SCREEN */
 #cinema{
   position:relative;
-  flex:1;
   padding-bottom:56.25%;
   background:#000;
   border-radius:22px;
   overflow:hidden;
 }
-#screen{
+#cinema video{
   position:absolute;
   inset:0;
-}
-#screen video{
   width:100%;
   height:100%;
   object-fit:contain;
-  background:#000;
 }
 
-/* PROJECTOR RIGHT */
-#projector{
-  width:160px;
-  flex-shrink:0;
+/* PROJECTOR */
+.projector-wrap{
   position:relative;
-  z-index:3;
+  width:220px;
 }
-#projector img{
+.projector-wrap img{
   width:100%;
   display:block;
   filter:drop-shadow(0 20px 40px rgba(212,175,55,.6));
 }
 
-/* GOLD LIGHT BEAM */
-.light-beam{
+/* GOLD BEAM */
+.beam{
   position:absolute;
-  left:-420px;
+  right:100%;
   top:50%;
   width:420px;
   height:180px;
   transform:translateY(-50%);
   background:linear-gradient(90deg,
-    rgba(212,175,55,.45),
+    rgba(212,175,55,.5),
     rgba(212,175,55,.15),
     rgba(212,175,55,0)
   );
   filter:blur(14px);
-  animation:beamPulse 3s ease-in-out infinite;
+  animation:beam 3s ease-in-out infinite;
 }
-@keyframes beamPulse{
+@keyframes beam{
   0%,100%{opacity:.6}
   50%{opacity:1}
 }
@@ -144,12 +134,11 @@ section{
 /* TEXT */
 .section-title{
   font-family:'Playfair Display',serif;
-  font-size:2.3rem;
+  font-size:2.4rem;
   text-align:center;
   margin:3rem 0 1rem;
   color:#f5e6b8;
 }
-p{text-align:center}
 
 /* FOOTER */
 footer{
@@ -160,8 +149,12 @@ footer{
 
 /* MOBILE */
 @media(max-width:900px){
-  .cinema-wrap{flex-direction:column}
-  .light-beam{display:none}
+  .cinema-row{
+    grid-template-columns:1fr;
+  }
+  .beam{
+    display:none;
+  }
 }
 </style>
 </head>
@@ -174,34 +167,28 @@ footer{
 
 <header>
   <h1>Zamów projekt</h1>
-  <p>Unikatowe formy, rzemiosło i design klasy galerii sztuki.</p>
 </header>
 
 <section>
 
 <p class="pre-info">
-Poniżej prezentujemy fragment realizacji – dokładnie tak, jak widzi ją klient.
+Poniżej prezentujemy rzeczywisty fragment realizacji — dokładnie tak, jak widzi go klient.
 </p>
 
 <h2 class="section-title">Zobacz naszą pracę</h2>
 
-<div class="cinema-wrap">
+<div class="cinema-row">
 
   <div id="cinema">
-    <div id="screen">
-      <video id="film" src="wideo.mp4" autoplay loop muted playsinline></video>
-    </div>
+    <video id="film" src="wideo.mp4" autoplay loop muted playsinline></video>
   </div>
 
-  <div id="projector">
-    <div class="light-beam"></div>
+  <div class="projector-wrap">
+    <div class="beam"></div>
     <img src="projektor.png" alt="Projektor">
   </div>
 
 </div>
-
-<h2 class="section-title">Limitowane formy</h2>
-<p>Każdy projekt powstaje jako unikat – bez kompromisów.</p>
 
 </section>
 
@@ -210,23 +197,13 @@ Poniżej prezentujemy fragment realizacji – dokładnie tak, jak widzi ją klie
 </footer>
 
 <script>
-window.addEventListener('load', () => {
-  const video = document.getElementById('film');
-  if(!video) return;
-
-  video.volume = 1.0;
-
-  const tryUnmute = () => {
-    video.muted = false;
-    video.play().catch(()=>{});
-  };
-
-  // szybkie próby po starcie
-  setTimeout(tryUnmute, 300);
-  setTimeout(tryUnmute, 800);
-
-  // odblokowanie po pierwszej interakcji
-  document.addEventListener('click', tryUnmute, { once:true });
+window.addEventListener('load',()=>{
+  const v=document.getElementById('film');
+  v.volume=1;
+  const unmute=()=>{v.muted=false;v.play().catch(()=>{});}
+  setTimeout(unmute,300);
+  setTimeout(unmute,900);
+  document.addEventListener('click',unmute,{once:true});
 });
 </script>
 
