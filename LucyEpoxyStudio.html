@@ -18,6 +18,28 @@ body{
   overflow-x:hidden;
   position:relative;
 }
+/* ===== LIGHT SWEEP EFFECT ===== */
+body::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+
+  background: linear-gradient(
+    120deg,
+    rgba(212,175,55,0) 0%,
+    rgba(212,175,55,0.08) 50%,
+    rgba(212,175,55,0) 100%
+  );
+  transform: translateX(-100%);
+  animation: lightSweep 12s linear infinite;
+}
+
+@keyframes lightSweep {
+  0% { transform: translateX(-100%) skewX(-25deg); }
+  100% { transform: translateX(200%) skewX(-25deg); }
+}
 
 /* ================= LUXURY PATTERN GRECKI ================= */
 body::before{
