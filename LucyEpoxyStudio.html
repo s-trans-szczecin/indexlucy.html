@@ -144,8 +144,9 @@ header p{
   color:#e0e0e0;
 }
 
+/* ===== CTA BUTTONS ===== */
 .cta{
-  margin-top:3rem;
+  margin-top:1.5rem;
   padding:1rem 2.8rem;
   border-radius:50px;
   border:1px solid rgba(212,175,55,.6);
@@ -153,6 +154,7 @@ header p{
   color:#f5e6b8;
   cursor:pointer;
   transition:.4s;
+  font-size:1rem;
 }
 
 .cta:hover{
@@ -274,7 +276,11 @@ footer{
 <header>
   <h1><span>Lucy</span>EpoxyStudio</h1>
   <p>Ultra-lux meble i formy z żywicy epoksydowej. Ręcznie tworzone dzieła, które definiują przestrzeń.</p>
-  <button class="cta">Zamów projekt premium</button>
+  
+  <!-- PRZYCISKI PODSTRON -->
+  <button class="cta" onclick="window.location.href='zamow-project.html'">Zamów projekt premium</button>
+  <button class="cta" onclick="window.location.href='contact.html'">Kontakt</button>
+  <button class="cta" onclick="window.location.href='android-download.html'">Pobierz na Androida</button>
 </header>
 
 <section>
