@@ -142,6 +142,15 @@ section{
   pointer-events:none;
 }
 
+/* SLIDER GŁOŚNOŚCI */
+#volumeControl{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:20;
+}
+
 /* MOBILE */
 @media(max-width:900px){
   .cinema-row{flex-direction:column}
@@ -188,9 +197,13 @@ To nie jest wizualizacja — to realna projekcja fragmentu naszej realizacji.
 © LucyEpoxyStudio · Ultra-Lux Design
 </footer>
 
+<!-- SLIDER DO GŁOŚNOŚCI -->
+<input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.7">
+
 <script>
 const video = document.getElementById('film');
 const beam  = document.getElementById('beam');
+const slider = document.getElementById('volumeControl');
 
 /* FADE-IN */
 window.addEventListener('load',()=> {
@@ -199,17 +212,23 @@ window.addEventListener('load',()=> {
 
 /* NATYCHMIASTOWY START */
 video.muted = true;
+video.volume = 0.7;
 video.play().catch(()=>{});
 
-/* JEDNO KLIKNIĘCIE = DŹWIĘK */
+/* JEDNO KLIKNIĘCIE = ODMIK DŹWIĘKU DO WYBRANEJ GŁOŚNOŚCI */
 document.addEventListener('click',()=>{
   if(video.muted){
     video.muted = false;
-    video.volume = .7;
+    video.volume = slider.value;
   }
 },{once:true});
 
-/* ANALIZA JASNOŚCI WIDEO */
+/* SLIDER GŁOŚNOŚCI */
+slider.addEventListener('input',()=>{
+  video.volume = slider.value;
+});
+
+/* ANALIZA JASNOŚCI + KONTRASTU WIDEO */
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -219,14 +238,19 @@ setInterval(()=>{
     canvas.height = 18;
     ctx.drawImage(video,0,0,32,18);
     const data = ctx.getImageData(0,0,32,18).data;
-    let sum = 0;
+    let sum=0, sumSq=0;
     for(let i=0;i<data.length;i+=4){
-      sum += (data[i]+data[i+1]+data[i+2])/3;
+      const lum = (data[i]+data[i+1]+data[i+2])/3;
+      sum += lum;
+      sumSq += lum*lum;
     }
-    const brightness = sum/(data.length/4)/255;
-    beam.style.opacity = .3 + brightness*.7;
-    beam.style.transform =
-      `translateY(-50%) scaleX(${1 + brightness*.15})`;
+    const mean = sum/(data.length/4);
+    const variance = sumSq/(data.length/4)-mean*mean;
+    const brightness = mean/255;
+    const contrast = Math.sqrt(variance)/255;
+
+    beam.style.opacity = 0.3 + brightness*0.5 + contrast*0.3;
+    beam.style.transform = `translateY(-50%) scaleX(${1 + brightness*0.1 + contrast*0.1})`;
   }
 },80);
 </script>
