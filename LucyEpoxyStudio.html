@@ -18,14 +18,35 @@ body{
   overflow-x:hidden;
   position:relative;
 }
+
+/* ================= LUXURY PATTERN GRECKI ================= */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0; /* pattern pod wszystkimi elementami */
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(212,175,55,.06) 0 2px,
+      transparent 2px 30px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(212,175,55,.04) 0 2px,
+      transparent 2px 30px
+    );
+  opacity:.25;
+}
+
 /* ===== LIGHT SWEEP EFFECT ===== */
 body::after {
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:-1;
-
+  z-index:1; /* nad patternem, pod treścią */
   background: linear-gradient(
     120deg,
     rgba(212,175,55,0) 0%,
@@ -39,29 +60,6 @@ body::after {
 @keyframes lightSweep {
   0% { transform: translateX(-100%) skewX(-25deg); }
   100% { transform: translateX(200%) skewX(-25deg); }
-}
-
-/* ================= LUXURY PATTERN GRECKI ================= */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-2;
-
-  background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(212,175,55,.06) 0 2px,
-      transparent 2px 30px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(212,175,55,.04) 0 2px,
-      transparent 2px 30px
-    );
-
-  opacity:.25;
 }
 
 /* ================= INTRO ================= */
