@@ -73,14 +73,12 @@ section{
   color:#f4e6b8;
 }
 
-/* LAYOUT */
+/* CINEMA */
 .cinema-row{
   display:flex;
   align-items:center;
   gap:3rem;
 }
-
-/* EKRAN */
 #cinema{
   position:relative;
   flex:1;
@@ -90,8 +88,6 @@ section{
   overflow:hidden;
   box-shadow: 0 10px 40px rgba(212,175,55,.3);
 }
-
-/* WIDEO */
 #cinema video{
   position:absolute;
   inset:0;
@@ -100,8 +96,6 @@ section{
   object-fit:contain;
   border-radius:20px;
 }
-
-/* ZIARNO FILMOWE */
 #grain{
   position:absolute;
   inset:0;
@@ -156,6 +150,35 @@ section{
   z-index:20;
 }
 
+/* FEATURES / OPIS */
+.features{
+  max-width:1200px;
+  margin:4rem auto;
+  padding:0 6%;
+  color:#f5e6b8;
+  text-align:center;
+}
+.features .feature-item{
+  margin-bottom:2.5rem;
+}
+.features h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.75rem;
+  margin-bottom:0.5rem;
+  background: linear-gradient(90deg, #f5e6b8, #d4af37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing:1px;
+}
+.features p{
+  font-family:'Inter',sans-serif;
+  font-size:1.15rem;
+  line-height:1.6;
+  color:#f4e6b8;
+  max-width:700px;
+  margin:auto;
+}
+
 /* MOBILE */
 @media(max-width:900px){
   .cinema-row{flex-direction:column}
@@ -196,6 +219,27 @@ To nie jest wizualizacja — to realna projekcja fragmentu naszej realizacji.
 
 </div>
 
+</section>
+
+<section class="features">
+  <p class="pre-info">
+    Każdy projekt LucyEpoxyStudio to <strong>unikatowa realizacja</strong>, tworzona z pasją i precyzją, bez kompromisów.
+  </p>
+
+  <div class="feature-item">
+    <h2>⌂ Limitowane formy</h2>
+    <p>Każdy projekt powstaje w pojedynczym egzemplarzu – nigdy nie powtarzamy, nigdy nie kompromisujemy jakości.</p>
+  </div>
+
+  <div class="feature-item">
+    <h2>◈ Rzemiosło & precyzja</h2>
+    <p>Ręczna selekcja drewna i żywicy, perfekcyjne wykończenie, dbałość o każdy detal, który sprawia, że każdy element zachwyca.</p>
+  </div>
+
+  <div class="feature-item">
+    <h2>✦ Design ultra-lux</h2>
+    <p>Produkty klasy galerii sztuki, idealne do ekskluzywnych wnętrz, gdzie elegancja spotyka się z przepychem w subtelny sposób.</p>
+  </div>
 </section>
 
 <footer>
