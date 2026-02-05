@@ -46,6 +46,28 @@ body::after{
   to{transform:translateX(200%) skewX(-25deg)}
 }
 
+/* ===== HOME BUTTON ===== */
+.home-btn{
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:999;
+  padding:.6rem 1.4rem;
+  border-radius:40px;
+  font-size:.9rem;
+  text-decoration:none;
+  color:#f5e6b8;
+  background:rgba(0,0,0,.6);
+  border:1px solid rgba(212,175,55,.6);
+  backdrop-filter:blur(6px);
+  transition:.3s;
+}
+.home-btn:hover{
+  background:rgba(212,175,55,.25);
+  box-shadow:0 10px 30px rgba(212,175,55,.5);
+  transform:translateY(-2px);
+}
+
 /* ===== HEADER ===== */
 header{
   min-height:60vh;
@@ -104,49 +126,23 @@ section{
   box-shadow:0 30px 80px rgba(0,0,0,.8);
 }
 
-/* ===== PROJECTOR ===== */
+/* ===== PROJECTOR IMAGE ===== */
 #projector{
   position:absolute;
-  top:-120px;
+  top:-160px;
   left:50%;
   transform:translateX(-50%);
-  width:150px;
-  height:90px;
+  width:180px;
   z-index:6;
   animation:projectorDrop 1s ease forwards;
 }
 @keyframes projectorDrop{
-  to{top:-10px}
+  to{top:-20px}
 }
-
-.proj-body{
+#projector img{
   width:100%;
-  height:60px;
-  background:linear-gradient(180deg,#1a1a1a,#050505);
-  border-radius:14px;
-  border:1px solid rgba(212,175,55,.4);
-  box-shadow:0 15px 30px rgba(0,0,0,.8);
-}
-.proj-lens{
-  position:absolute;
-  right:-26px;
-  top:16px;
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  background:radial-gradient(circle,#fff2b2,#d4af37,#000);
-  box-shadow:0 0 25px rgba(212,175,55,.8);
-}
-.proj-leg{
-  position:absolute;
-  bottom:-14px;
-  left:50%;
-  transform:translateX(-50%);
-  width:26px;
-  height:14px;
-  background:#111;
-  border-radius:0 0 8px 8px;
-  border:1px solid rgba(212,175,55,.3);
+  height:auto;
+  filter:drop-shadow(0 20px 40px rgba(212,175,55,.6));
 }
 
 /* ===== SCREEN ===== */
@@ -160,7 +156,6 @@ section{
 @keyframes screenDrop{
   to{transform:translateY(0)}
 }
-
 #screen video{
   width:100%;
   height:100%;
@@ -193,6 +188,10 @@ footer{
 
 <body>
 
+<a href="https://s-trans-szczecin.github.io/indexlucy.html/LucyEpoxyStudio.html" class="home-btn">
+  ⬅ Strona główna
+</a>
+
 <header>
   <h1>Zamów projekt</h1>
   <p>Unikatowe formy, rzemiosło i design klasy galerii sztuki.</p>
@@ -204,9 +203,7 @@ footer{
 
   <div id="cinema">
     <div id="projector">
-      <div class="proj-body"></div>
-      <div class="proj-lens"></div>
-      <div class="proj-leg"></div>
+      <img src="projector.png" alt="Projektor">
     </div>
 
     <div id="screen">
