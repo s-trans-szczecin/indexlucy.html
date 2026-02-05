@@ -16,15 +16,22 @@ body{
   color:#f4f4f4;
 }
 
-/* GRID TŁA */
+/* GRID TŁA – NAPRAWIONY Z-INDEX */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
+  z-index:0;
   background:
     repeating-linear-gradient(90deg, rgba(212,175,55,.05) 0 2px, transparent 2px 30px),
     repeating-linear-gradient(0deg, rgba(212,175,55,.04) 0 2px, transparent 2px 30px);
+}
+
+/* CONTENT NAD TŁEM */
+header, section, footer{
+  position:relative;
+  z-index:2;
 }
 
 /* HEADER */
@@ -78,17 +85,20 @@ section{
   object-fit:contain;
 }
 
-/* PROJEKTOR */
+/* PROJEKTOR – STABILNA WERSJA */
 .projector-wrap{
   position:relative;
   width:240px;
   flex-shrink:0;
-  z-index:5;
+  z-index:10;
 }
+
 .projector-wrap img{
   width:100%;
   display:block;
-  filter:drop-shadow(0 20px 40px rgba(212,175,55,.6));
+  position:relative;
+  z-index:5;
+  box-shadow:0 20px 40px rgba(212,175,55,.6);
 }
 
 /* ZŁOTA SMUGA */
@@ -106,6 +116,7 @@ section{
   );
   filter:blur(16px);
   pointer-events:none;
+  z-index:1;
   animation:beam 2s ease-in-out infinite;
 }
 @keyframes beam{
