@@ -108,7 +108,7 @@ header p {
   max-width: 900px;
   margin: 3rem auto;
   height: 0;
-  padding-bottom: 56.25%; /* proporcje 16:9 */
+  padding-bottom: 56.25%;
   background: #000;
   overflow: hidden;
   border-radius: 20px;
@@ -117,7 +117,7 @@ header p {
 
 #screen {
   position: absolute;
-  top: -100%; /* start ponad ekranem */
+  top: -100%;
   left: 0;
   width: 100%;
   height: 100%;
@@ -220,7 +220,7 @@ footer {
 </footer>
 
 <script>
-// Animacja zjazdu ekranu i odtwarzanie wideo
+// Animacja ekranu i odtwarzanie wideo
 window.addEventListener('DOMContentLoaded', () => {
   const screen = document.getElementById('screen');
   const video = document.getElementById('projector-video');
@@ -231,6 +231,15 @@ window.addEventListener('DOMContentLoaded', () => {
   // Po zakończeniu animacji odtwórz wideo
   screen.addEventListener('animationend', () => {
     video.play().catch(e => console.log('Nie udało się odtworzyć wideo:', e));
+  });
+
+  // Włącz dźwięk po kliknięciu w jakikolwiek przycisk CTA
+  const ctaButtons = document.querySelectorAll('.cta');
+  ctaButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      video.muted = false;
+      video.play().catch(e => console.log('Nie udało się odtworzyć wideo z dźwiękiem:', e));
+    });
   });
 });
 </script>
