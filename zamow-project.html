@@ -14,10 +14,9 @@ body{
   font-family:'Inter',sans-serif;
   background:#050505;
   color:#f4f4f4;
-  overflow-x:hidden;
 }
 
-/* GRID */
+/* GRID TŁA */
 body::before{
   content:"";
   position:fixed;
@@ -28,24 +27,9 @@ body::before{
     repeating-linear-gradient(0deg, rgba(212,175,55,.04) 0 2px, transparent 2px 30px);
 }
 
-/* HOME */
-.home-btn{
-  position:fixed;
-  top:20px;
-  left:20px;
-  z-index:999;
-  padding:.6rem 1.4rem;
-  border-radius:40px;
-  font-size:.9rem;
-  text-decoration:none;
-  color:#f5e6b8;
-  background:rgba(0,0,0,.6);
-  border:1px solid rgba(212,175,55,.6);
-}
-
 /* HEADER */
 header{
-  min-height:55vh;
+  min-height:50vh;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -58,29 +42,29 @@ header h1{
 
 /* SECTION */
 section{
-  padding:4rem 8%;
   max-width:1400px;
   margin:auto;
+  padding:3rem 6%;
 }
 
 /* INFO */
 .pre-info{
   text-align:center;
   font-size:1.15rem;
-  margin-bottom:2.5rem;
+  margin-bottom:3rem;
 }
 
-/* CINEMA ROW */
+/* LAYOUT */
 .cinema-row{
-  display:grid;
-  grid-template-columns: 1fr 220px;
-  gap:3rem;
+  display:flex;
   align-items:center;
+  gap:3rem;
 }
 
-/* SCREEN */
+/* EKRAN */
 #cinema{
   position:relative;
+  flex:1;
   padding-bottom:56.25%;
   background:#000;
   border-radius:22px;
@@ -94,59 +78,58 @@ section{
   object-fit:contain;
 }
 
-/* PROJECTOR */
+/* PROJEKTOR */
 .projector-wrap{
   position:relative;
-  width:220px;
+  width:240px;
+  flex-shrink:0;
+  z-index:5;
 }
 .projector-wrap img{
   width:100%;
+  display:block;
   filter:drop-shadow(0 20px 40px rgba(212,175,55,.6));
 }
 
-/* GOLD BEAM */
+/* ZŁOTA SMUGA */
 .beam{
   position:absolute;
   right:100%;
   top:50%;
-  width:420px;
-  height:180px;
   transform:translateY(-50%);
+  width:420px;
+  height:200px;
   background:linear-gradient(90deg,
-    rgba(212,175,55,.5),
-    rgba(212,175,55,.15),
+    rgba(212,175,55,.55),
+    rgba(212,175,55,.2),
     rgba(212,175,55,0)
   );
-  filter:blur(14px);
-  animation:beam 2.2s ease-in-out infinite;
+  filter:blur(16px);
+  pointer-events:none;
+  animation:beam 2s ease-in-out infinite;
 }
 @keyframes beam{
   0%,100%{opacity:.6}
   50%{opacity:1}
 }
 
-/* FOOTER */
+/* MOBILE */
+@media(max-width:900px){
+  .cinema-row{
+    flex-direction:column;
+  }
+  .beam{display:none}
+}
+
 footer{
   text-align:center;
   padding:3rem;
   color:#777;
 }
-
-/* MOBILE */
-@media(max-width:900px){
-  .cinema-row{
-    grid-template-columns:1fr;
-  }
-  .beam{display:none}
-}
 </style>
 </head>
 
 <body>
-
-<a class="home-btn" href="https://s-trans-szczecin.github.io/indexlucy.html/LucyEpoxyStudio.html">
-⬅ Strona główna
-</a>
 
 <header>
   <h1>Zamów projekt</h1>
@@ -155,7 +138,7 @@ footer{
 <section>
 
 <p class="pre-info">
-Poniżej prezentujemy rzeczywisty fragment realizacji — dokładnie tak, jak widzi go klient.
+To nie jest wizualizacja — to realna projekcja fragmentu naszej realizacji.
 </p>
 
 <div class="cinema-row">
@@ -167,8 +150,7 @@ Poniżej prezentujemy rzeczywisty fragment realizacji — dokładnie tak, jak wi
       autoplay
       muted
       loop
-      playsinline
-      preload="auto">
+      playsinline>
     </video>
   </div>
 
@@ -188,24 +170,14 @@ Poniżej prezentujemy rzeczywisty fragment realizacji — dokładnie tak, jak wi
 <script>
 const v = document.getElementById('film');
 
-v.addEventListener('loadeddata', () => {
-  try {
-    v.currentTime = 0.01; // omija czarną klatkę
-    v.volume = 1;
-    v.muted = false;
-    v.play();
-  } catch(e){}
+/* START NATYCHMIAST PO GOTOWOŚCI */
+v.addEventListener('canplay', () => {
+  v.currentTime = 0;
+  v.play().catch(()=>{});
 });
 
-// awaryjne wymuszenie
-setTimeout(()=>v.play().catch(()=>{}),200);
-setTimeout(()=>v.play().catch(()=>{}),600);
-
-// klik jako fallback (Safari / iOS)
-document.addEventListener('click',()=>{
-  v.muted=false;
-  v.play().catch(()=>{});
-},{once:true});
+/* AWARYJNE WYMUSZENIE */
+setTimeout(()=>v.play().catch(()=>{}),150);
 </script>
 
 </body>
