@@ -348,7 +348,7 @@ setInterval(()=>{
     let sum=0, sumSq=0;
     for(let i=0;i<data.length;i+=4){
       const lum = (data[i]+data[i+1]+data[i+2])/3;
-      sum += lum;
+      sum += lum; 
       sumSq += lum*lum;
     }
     const mean = sum/(data.length/4);
