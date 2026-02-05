@@ -14,6 +14,18 @@ body{
   font-family:'Inter',sans-serif;
   background:#050505;
   color:#f4f4f4;
+  overflow-x:hidden;
+}
+
+/* FADE-IN KINA */
+body.loaded section{
+  opacity:1;
+  transform:scale(1);
+}
+section{
+  opacity:0;
+  transform:scale(.98);
+  transition:opacity 1.2s ease, transform 1.2s ease;
 }
 
 /* TŁO */
@@ -28,7 +40,6 @@ body::before{
     repeating-linear-gradient(0deg, rgba(212,175,55,.04) 0 2px, transparent 2px 30px);
 }
 
-/* CONTENT NAD TŁEM */
 header, section, footer{
   position:relative;
   z-index:2;
@@ -36,7 +47,7 @@ header, section, footer{
 
 /* HEADER */
 header{
-  min-height:50vh;
+  min-height:40vh;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -76,8 +87,9 @@ section{
   background:#000;
   border-radius:22px;
   overflow:hidden;
-  z-index:1;
 }
+
+/* WIDEO */
 #cinema video{
   position:absolute;
   inset:0;
@@ -86,66 +98,53 @@ section{
   object-fit:contain;
 }
 
+/* ZIARNO FILMOWE */
+#grain{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  animation:grainMove .4s steps(2) infinite;
+}
+@keyframes grainMove{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(-10%,10%)}
+}
+
 /* PROJEKTOR */
 .projector-wrap{
   position:relative;
   width:240px;
   flex-shrink:0;
-  z-index:50;
+  z-index:10;
 }
 .projector-wrap img{
   width:100%;
   display:block;
-  position:relative;
-  z-index:50;
 }
 
-/* ZŁOTA, MIENIĄCA SIĘ SMUGA */
+/* SMUGA */
 .beam{
   position:absolute;
   right:100%;
   top:50%;
   transform:translateY(-50%);
-  width:480px;
-  height:220px;
+  width:520px;
+  height:240px;
   background:linear-gradient(90deg,
-    rgba(255,215,120,.55),
+    rgba(255,215,120,.6),
     rgba(212,175,55,.35),
     rgba(212,175,55,.15),
     rgba(212,175,55,0)
   );
-  filter:blur(18px);
+  filter:blur(20px);
+  opacity:.6;
   pointer-events:none;
-  z-index:10;
-  animation:
-    beamPulse 3s ease-in-out infinite,
-    beamFlicker .18s linear infinite;
-}
-
-/* „oddychanie” światła */
-@keyframes beamPulse{
-  0%,100%{
-    opacity:.55;
-    transform:translateY(-50%) scaleX(1);
-  }
-  50%{
-    opacity:.9;
-    transform:translateY(-50%) scaleX(1.05);
-  }
-}
-
-/* subtelne migotanie */
-@keyframes beamFlicker{
-  0%{filter:blur(17px)}
-  50%{filter:blur(19px)}
-  100%{filter:blur(18px)}
 }
 
 /* MOBILE */
 @media(max-width:900px){
-  .cinema-row{
-    flex-direction:column;
-  }
+  .cinema-row{flex-direction:column}
   .beam{display:none}
 }
 
@@ -172,18 +171,12 @@ To nie jest wizualizacja — to realna projekcja fragmentu naszej realizacji.
 <div class="cinema-row">
 
   <div id="cinema">
-    <video
-      id="film"
-      src="wideo.mp4"
-      autoplay
-      muted
-      loop
-      playsinline>
-    </video>
+    <video id="film" src="wideo.mp4" muted loop playsinline></video>
+    <div id="grain"></div>
   </div>
 
   <div class="projector-wrap">
-    <div class="beam"></div>
+    <div class="beam" id="beam"></div>
     <img src="projector.png" alt="Projektor">
   </div>
 
@@ -196,28 +189,46 @@ To nie jest wizualizacja — to realna projekcja fragmentu naszej realizacji.
 </footer>
 
 <script>
-const v = document.getElementById('film');
+const video = document.getElementById('film');
+const beam  = document.getElementById('beam');
 
-v.muted = true;
-v.playsInline = true;
-
-function startVideo(){
-  const p = v.play();
-  if(p !== undefined){
-    p.catch(()=>{});
-  }
-}
-
-v.addEventListener('loadeddata', startVideo);
-v.addEventListener('canplaythrough', startVideo);
-
-document.addEventListener('visibilitychange', () => {
-  if(!document.hidden){
-    startVideo();
-  }
+/* FADE-IN */
+window.addEventListener('load',()=> {
+  document.body.classList.add('loaded');
 });
 
-setTimeout(startVideo, 300);
+/* NATYCHMIASTOWY START */
+video.muted = true;
+video.play().catch(()=>{});
+
+/* JEDNO KLIKNIĘCIE = DŹWIĘK */
+document.addEventListener('click',()=>{
+  if(video.muted){
+    video.muted = false;
+    video.volume = .7;
+  }
+},{once:true});
+
+/* ANALIZA JASNOŚCI WIDEO */
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+
+setInterval(()=>{
+  if(video.readyState >= 2){
+    canvas.width = 32;
+    canvas.height = 18;
+    ctx.drawImage(video,0,0,32,18);
+    const data = ctx.getImageData(0,0,32,18).data;
+    let sum = 0;
+    for(let i=0;i<data.length;i+=4){
+      sum += (data[i]+data[i+1]+data[i+2])/3;
+    }
+    const brightness = sum/(data.length/4)/255;
+    beam.style.opacity = .3 + brightness*.7;
+    beam.style.transform =
+      `translateY(-50%) scaleX(${1 + brightness*.15})`;
+  }
+},80);
 </script>
 
 </body>
