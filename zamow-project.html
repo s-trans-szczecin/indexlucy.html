@@ -47,11 +47,8 @@ body::before{
 header{
   min-height:55vh;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
-  padding:4rem 2rem;
 }
 header h1{
   font-family:'Playfair Display',serif;
@@ -71,7 +68,6 @@ section{
   text-align:center;
   font-size:1.15rem;
   margin-bottom:2.5rem;
-  color:#e0e0e0;
 }
 
 /* CINEMA ROW */
@@ -80,7 +76,6 @@ section{
   grid-template-columns: 1fr 220px;
   gap:3rem;
   align-items:center;
-  position:relative;
 }
 
 /* SCREEN */
@@ -106,7 +101,6 @@ section{
 }
 .projector-wrap img{
   width:100%;
-  display:block;
   filter:drop-shadow(0 20px 40px rgba(212,175,55,.6));
 }
 
@@ -124,20 +118,11 @@ section{
     rgba(212,175,55,0)
   );
   filter:blur(14px);
-  animation:beam 3s ease-in-out infinite;
+  animation:beam 2.2s ease-in-out infinite;
 }
 @keyframes beam{
   0%,100%{opacity:.6}
   50%{opacity:1}
-}
-
-/* TEXT */
-.section-title{
-  font-family:'Playfair Display',serif;
-  font-size:2.4rem;
-  text-align:center;
-  margin:3rem 0 1rem;
-  color:#f5e6b8;
 }
 
 /* FOOTER */
@@ -152,9 +137,7 @@ footer{
   .cinema-row{
     grid-template-columns:1fr;
   }
-  .beam{
-    display:none;
-  }
+  .beam{display:none}
 }
 </style>
 </head>
@@ -175,12 +158,18 @@ footer{
 Poniżej prezentujemy rzeczywisty fragment realizacji — dokładnie tak, jak widzi go klient.
 </p>
 
-<h2 class="section-title">Zobacz naszą pracę</h2>
-
 <div class="cinema-row">
 
   <div id="cinema">
-    <video id="film" src="wideo.mp4" autoplay loop muted playsinline></video>
+    <video
+      id="film"
+      src="wideo.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto">
+    </video>
   </div>
 
   <div class="projector-wrap">
@@ -197,14 +186,26 @@ Poniżej prezentujemy rzeczywisty fragment realizacji — dokładnie tak, jak wi
 </footer>
 
 <script>
-window.addEventListener('load',()=>{
-  const v=document.getElementById('film');
-  v.volume=1;
-  const unmute=()=>{v.muted=false;v.play().catch(()=>{});}
-  setTimeout(unmute,300);
-  setTimeout(unmute,900);
-  document.addEventListener('click',unmute,{once:true});
+const v = document.getElementById('film');
+
+v.addEventListener('loadeddata', () => {
+  try {
+    v.currentTime = 0.01; // omija czarną klatkę
+    v.volume = 1;
+    v.muted = false;
+    v.play();
+  } catch(e){}
 });
+
+// awaryjne wymuszenie
+setTimeout(()=>v.play().catch(()=>{}),200);
+setTimeout(()=>v.play().catch(()=>{}),600);
+
+// klik jako fallback (Safari / iOS)
+document.addEventListener('click',()=>{
+  v.muted=false;
+  v.play().catch(()=>{});
+},{once:true});
 </script>
 
 </body>
