@@ -19,49 +19,16 @@ body {
 
 /* ================= HEADER ================= */
 header {
-  min-height: 60vh;
+  min-height: 50vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 4rem 2rem;
-}
-
-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 6vw, 3.5rem);
-  color: #f5e6b8;
-}
-
-header p {
-  max-width: 760px;
-  margin-top: 1.2rem;
-  font-size: 1.1rem;
-  color: #e0e0e0;
-}
-
-.cta {
-  margin-top: 2rem;
-  padding: 1rem 2.8rem;
-  border-radius: 50px;
-  border: 1px solid rgba(212,175,55,.6);
-  background: rgba(255,255,255,.06);
-  color: #f5e6b8;
-  cursor: pointer;
-  transition: .4s;
-}
-
-.cta:hover {
-  background: rgba(212,175,55,.25);
-  transform: translateY(-4px);
-  box-shadow: 0 25px 50px rgba(212,175,55,.4);
 }
 
 /* ================= KINO ================= */
 #cinema-wrapper {
   position: relative;
-  padding: 6rem 1rem;
+  padding: 6rem 1rem 8rem;
   display: flex;
   justify-content: center;
 }
@@ -69,44 +36,45 @@ header p {
 /* PROJEKTOR */
 #projector {
   position: absolute;
-  top: 0;
-  width: 160px;
+  top: -80px;
+  width: 180px;
   height: 60px;
-  background: linear-gradient(145deg, #222, #000);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.8);
+  background: linear-gradient(145deg, #1a1a1a, #000);
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.9);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #d4af37;
-  font-size: .9rem;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  font-size: .8rem;
   opacity: 0;
-  animation: projectorIn 1.5s forwards;
+  animation: projectorIn 1.6s forwards;
 }
 
 /* SOCZEWKA */
 #projector::after {
   content: "";
   position: absolute;
-  right: 10px;
-  width: 16px;
-  height: 16px;
-  background: radial-gradient(circle, #ffd 0%, #d4af37 40%, #000 70%);
+  right: 14px;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, #fff 0%, #d4af37 45%, #000 70%);
   border-radius: 50%;
 }
 
 /* STOŻEK ŚWIATŁA */
 #beam {
   position: absolute;
-  top: 60px;
+  top: -20px;
   width: 0;
   height: 0;
-  border-left: 220px solid transparent;
-  border-right: 220px solid transparent;
-  border-bottom: 520px solid rgba(212,175,55,0.08);
+  border-left: 260px solid transparent;
+  border-right: 260px solid transparent;
+  border-bottom: 620px solid rgba(212,175,55,0.10);
   opacity: 0;
   animation: beamOn 2s 1.2s forwards;
+  filter: blur(1px);
 }
 
 /* EKRAN */
@@ -118,7 +86,7 @@ header p {
   background: #000;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0,0,0,.8);
+  box-shadow: 0 25px 60px rgba(0,0,0,.85);
 }
 
 #screen {
@@ -141,7 +109,7 @@ header p {
 
 /* ================= ANIMACJE ================= */
 @keyframes projectorIn {
-  from { transform: translateY(-50px); opacity: 0; }
+  from { transform: translateY(-60px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
@@ -152,30 +120,12 @@ header p {
 @keyframes screenDrop {
   to { top: 0; }
 }
-
-/* ================= SEKCJA ================= */
-section {
-  padding: 5rem 10%;
-  max-width: 1000px;
-  margin: auto;
-}
-
-h2 {
-  font-family: 'Playfair Display', serif;
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #f5e6b8;
-}
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Zamów projekt</h1>
-  <p>Kliknij poniżej – sala gaśnie, projektor rusza 🎬</p>
-  <button class="cta" id="startCinema">Uruchom kino</button>
-</header>
+<header></header>
 
 <div id="cinema-wrapper">
   <div id="projector">PROJECTOR</div>
@@ -183,21 +133,34 @@ h2 {
 
   <div id="cinema">
     <div id="screen">
-      <video id="video" src="wideo.mp4" loop playsinline></video>
+      <video
+        id="video"
+        src="wideo.mp4"
+        autoplay
+        playsinline
+        loop
+      ></video>
     </div>
   </div>
 </div>
 
-<section>
-  <h2>Limitowane formy</h2>
-  <p>Każdy projekt powstaje jako unikat – bez powtórzeń i kompromisów.</p>
-</section>
-
 <script>
-document.getElementById("startCinema").addEventListener("click", () => {
+window.addEventListener("load", () => {
   const video = document.getElementById("video");
+
+  // próba wymuszenia dźwięku
   video.muted = false;
-  video.play();
+  const playPromise = video.play();
+
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      // jeśli przeglądarka zablokuje audio – ruszy po pierwszym kliknięciu
+      document.body.addEventListener("click", () => {
+        video.muted = false;
+        video.play();
+      }, { once: true });
+    });
+  }
 });
 </script>
 
