@@ -8,32 +8,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-body{
-  font-family:'Inter',sans-serif;
-  background:#050505;
-  color:#f4f4f4;
-  line-height:1.7;
-  overflow-x:hidden;
-  position:relative;
+body {
+  font-family: 'Inter', sans-serif;
+  background: #050505;
+  color: #f4f4f4;
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* ================= ANIMOWANY WZÓR GRECKI TŁA ================= */
+/* ================= ANIMOWANY WZÓR GRECKI ================= */
 body::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
   background-image:
     repeating-linear-gradient(90deg, rgba(212,175,55,0.06) 0 2px, transparent 2px 30px),
     repeating-linear-gradient(0deg, rgba(212,175,55,0.04) 0 2px, transparent 2px 30px);
   background-size: 200px 200px;
-  opacity:0.25;
+  opacity: 0.25;
   animation: movePattern 30s linear infinite alternate;
 }
-
 @keyframes movePattern {
   0% { background-position: 0 0, 0 0; }
   25% { background-position: 50px 100px, 100px 50px; }
@@ -44,87 +43,100 @@ body::before {
 
 /* ================= LIGHT SWEEP ================= */
 body::after {
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:1;
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
   background: linear-gradient(120deg, rgba(212,175,55,0) 0%, rgba(212,175,55,0.08) 50%, rgba(212,175,55,0) 100%);
   transform: translateX(-100%);
   animation: lightSweep 12s linear infinite;
 }
-
-@keyframes lightSweep{
+@keyframes lightSweep {
   0% { transform: translateX(-100%) skewX(-25deg); }
   100% { transform: translateX(200%) skewX(-25deg); }
 }
 
-/* Header */
-header{
-  min-height:60vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:4rem 2rem;
-  position:relative;
-}
-header h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.5rem,6vw,3.5rem);
-  color:#f5e6b8;
-}
-header p{
-  max-width:760px;
-  margin-top:1.2rem;
-  font-size:1.1rem;
-  color:#e0e0e0;
+/* ================= HEADER ================= */
+header {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 2;
 }
 
-/* CTA */
-.cta{
-  margin-top:2rem;
-  padding:1rem 2.8rem;
-  border-radius:50px;
-  border:1px solid rgba(212,175,55,.6);
-  background:rgba(255,255,255,.06);
-  color:#f5e6b8;
-  cursor:pointer;
-  transition:.4s;
-  font-size:1rem;
-}
-.cta:hover{
-  background:rgba(212,175,55,.25);
-  transform:translateY(-4px);
-  box-shadow:0 25px 50px rgba(212,175,55,.4);
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  color: #f5e6b8;
 }
 
-/* Sekcja treści */
-section{
-  padding:5rem 10%;
-  max-width:1000px;
-  margin:0 auto;
-}
-h2.section-title{
-  font-family:'Playfair Display',serif;
-  font-size:2.5rem;
-  margin-bottom:2rem;
-  text-align:center;
-  color:#f5e6b8;
-}
-p{
-  margin-bottom:1.8rem;
-  font-size:1.15rem;
-  color:#e0e0e0;
+header p {
+  max-width: 760px;
+  margin-top: 1.2rem;
+  font-size: 1.1rem;
+  color: #e0e0e0;
 }
 
-/* Stopka */
-footer{
-  text-align:center;
-  padding:3rem 1rem;
-  color:#777;
-  font-size:.9rem;
+.cta {
+  margin-top: 2rem;
+  padding: 1rem 2.8rem;
+  border-radius: 50px;
+  border: 1px solid rgba(212,175,55,.6);
+  background: rgba(255,255,255,.06);
+  color: #f5e6b8;
+  cursor: pointer;
+  transition: .4s;
+  font-size: 1rem;
+}
+
+.cta:hover {
+  background: rgba(212,175,55,.25);
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(212,175,55,.4);
+}
+
+/* ================= FILMIK ================= */
+video {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.6);
+  margin: 2rem 0;
+}
+
+/* ================= SEKCJE ================= */
+section {
+  padding: 5rem 10%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h2.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #f5e6b8;
+}
+
+p {
+  margin-bottom: 1.8rem;
+  font-size: 1.15rem;
+  color: #e0e0e0;
+}
+
+/* ================= STOPKA ================= */
+footer {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #777;
+  font-size: .9rem;
 }
 </style>
 </head>
@@ -143,6 +155,16 @@ footer{
 </header>
 
 <section>
+  <h2 class="section-title">Zobacz naszą pracę</h2>
+
+  <video 
+    src="https://video.pictory.ai/v2/preview/202602042034390584ab9a15dc5ef420fae6079ad9e71e752" 
+    autoplay 
+    muted 
+    loop 
+    playsinline
+  ></video>
+
   <h2 class="section-title">Limitowane formy</h2>
   <p>Każdy projekt powstaje jako unikat – bez powtórzeń i kompromisów.</p>
 
