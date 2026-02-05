@@ -28,7 +28,7 @@ section{
   transition:opacity 1.2s ease, transform 1.2s ease;
 }
 
-/* TŁO */
+/* TŁO – luksusowy grid w złocie */
 body::before{
   content:"";
   position:fixed;
@@ -36,13 +36,8 @@ body::before{
   pointer-events:none;
   z-index:0;
   background:
-    repeating-linear-gradient(90deg, rgba(212,175,55,.05) 0 2px, transparent 2px 30px),
-    repeating-linear-gradient(0deg, rgba(212,175,55,.04) 0 2px, transparent 2px 30px);
-}
-
-header, section, footer{
-  position:relative;
-  z-index:2;
+    repeating-linear-gradient(90deg, rgba(212,175,55,.06) 0 2px, transparent 2px 30px),
+    repeating-linear-gradient(0deg, rgba(212,175,55,.05) 0 2px, transparent 2px 30px);
 }
 
 /* HEADER */
@@ -55,7 +50,12 @@ header{
 header h1{
   font-family:'Playfair Display',serif;
   font-size:3rem;
-  color:#f5e6b8;
+  color: #f5e6b8;
+  background: linear-gradient(90deg, #f5e6b8, #d4af37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(0,0,0,.4);
+  letter-spacing: 1px;
 }
 
 /* SECTION */
@@ -70,6 +70,7 @@ section{
   text-align:center;
   font-size:1.15rem;
   margin-bottom:3rem;
+  color:#f4e6b8;
 }
 
 /* LAYOUT */
@@ -87,6 +88,7 @@ section{
   background:#000;
   border-radius:22px;
   overflow:hidden;
+  box-shadow: 0 10px 40px rgba(212,175,55,.3);
 }
 
 /* WIDEO */
@@ -96,6 +98,7 @@ section{
   width:100%;
   height:100%;
   object-fit:contain;
+  border-radius:20px;
 }
 
 /* ZIARNO FILMOWE */
@@ -103,7 +106,7 @@ section{
   position:absolute;
   inset:0;
   pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
   animation:grainMove .4s steps(2) infinite;
 }
 @keyframes grainMove{
@@ -121,6 +124,7 @@ section{
 .projector-wrap img{
   width:100%;
   display:block;
+  filter: drop-shadow(0 20px 40px rgba(212,175,55,.6));
 }
 
 /* SMUGA */
@@ -137,9 +141,10 @@ section{
     rgba(212,175,55,.15),
     rgba(212,175,55,0)
   );
-  filter:blur(20px);
+  filter:blur(22px);
   opacity:.6;
   pointer-events:none;
+  transition: transform .1s ease, opacity .1s ease;
 }
 
 /* SLIDER GŁOŚNOŚCI */
@@ -197,7 +202,6 @@ To nie jest wizualizacja — to realna projekcja fragmentu naszej realizacji.
 © LucyEpoxyStudio · Ultra-Lux Design
 </footer>
 
-<!-- SLIDER DO GŁOŚNOŚCI -->
 <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.7">
 
 <script>
@@ -215,7 +219,7 @@ video.muted = true;
 video.volume = 0.7;
 video.play().catch(()=>{});
 
-/* JEDNO KLIKNIĘCIE = ODMIK DŹWIĘKU DO WYBRANEJ GŁOŚNOŚCI */
+/* ODMIK DŹWIĘKU PO KLIKNIECIU */
 document.addEventListener('click',()=>{
   if(video.muted){
     video.muted = false;
