@@ -46,16 +46,19 @@ header{
   display:flex;
   justify-content:center;
   align-items:center;
+  flex-direction:column;
+  text-align:center;
+  padding:2rem;
 }
 header h1{
   font-family:'Playfair Display',serif;
-  font-size:3rem;
+  font-size:clamp(2.5rem,6vw,3rem);
   color: #f5e6b8;
   background: linear-gradient(90deg, #f5e6b8, #d4af37);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 10px rgba(0,0,0,.4);
-  letter-spacing: 1px;
+  letter-spacing:1px;
 }
 
 /* SECTION */
@@ -78,11 +81,12 @@ section{
   display:flex;
   align-items:center;
   gap:3rem;
-  position:relative;
+  justify-content:center;
 }
 #cinema{
   position:relative;
   flex:1;
+  max-width:720px;
   padding-bottom:56.25%;
   background:#000;
   border-radius:22px;
@@ -96,6 +100,7 @@ section{
   height:100%;
   object-fit:contain;
   border-radius:20px;
+  display:none; /* start hidden, show after PLAY */
 }
 #grain{
   position:absolute;
@@ -142,35 +147,27 @@ section{
   transition: transform .1s ease, opacity .1s ease;
 }
 
-/* GOLD PLAY BUTTON */
+/* PLAY BUTTON */
 #playBtn{
   position:absolute;
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
   background:linear-gradient(90deg,#f5e6b8,#d4af37);
-  border:none;
-  border-radius:50%;
-  width:80px;
-  height:80px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  z-index:20;
-  box-shadow:0 8px 30px rgba(212,175,55,.5);
-  animation:pulse 1.2s infinite;
-}
-#playBtn::after{
-  content:"▶";
-  font-size:2rem;
   color:#050505;
-  margin-left:3px;
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  padding:1rem 2rem;
+  border-radius:12px;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(212,175,55,.6);
+  animation:playPulse 1.5s infinite alternate;
+  z-index:20;
+  text-align:center;
 }
-@keyframes pulse{
+@keyframes playPulse{
   0%{transform:translate(-50%,-50%) scale(1)}
-  50%{transform:translate(-50%,-50%) scale(1.15)}
-  100%{transform:translate(-50%,-50%) scale(1)}
+  100%{transform:translate(-50%,-50%) scale(1.08)}
 }
 
 /* SLIDER GŁOŚNOŚCI */
@@ -259,9 +256,9 @@ To nie jest wizualizacja — to realna projekcja fragmentu naszej realizacji.
 <div class="cinema-row">
 
   <div id="cinema">
-    <video id="film" src="wideo.mp4" muted loop playsinline></video>
+    <video id="film" src="wideo.mp4" playsinline></video>
     <div id="grain"></div>
-    <button id="playBtn"></button>
+    <div id="playBtn">▶ Play</div>
   </div>
 
   <div class="projector-wrap">
@@ -318,15 +315,11 @@ window.addEventListener('load',()=> {
   document.body.classList.add('loaded');
 });
 
-/* START WIDEO */
-video.muted = true;
-video.volume = 0.7;
-
 /* PLAY BUTTON */
-playBtn.addEventListener('click', ()=>{
+playBtn.addEventListener('click',()=>{
+  video.style.display='block';
   video.muted = false;
-  video.volume = slider.value;
-  video.play();
+  video.play().catch(()=>{});
   playBtn.style.display='none';
 });
 
@@ -335,7 +328,7 @@ slider.addEventListener('input',()=>{
   video.volume = slider.value;
 });
 
-/* ANALIZA JASNOŚCI + KONTRASTU */
+/* ANALIZA JASNOŚCI + KONTRASTU WIDEO */
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 
