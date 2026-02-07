@@ -1,338 +1,506 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LucyEpoxyStudio | Ultra-Lux Design</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kancelaria Adwokacka Nowak & Partnerzy</title>
+  <meta name="description" content="Nowoczesna kancelaria adwokacka: prawo karne, cywilne i gospodarcze. Strategiczne prowadzenie spraw, pełna dyskrecja i szybki kontakt." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b111b;
+      --bg-soft: #101a29;
+      --panel: rgba(255, 255, 255, 0.05);
+      --line: rgba(255, 255, 255, 0.16);
+      --line-strong: rgba(210, 173, 104, 0.5);
+      --text: #ebf0f8;
+      --muted: #a9b7ca;
+      --gold: #d2ad68;
+      --gold-soft: #f3ddb2;
+      --accent: #8ec7ff;
+      --radius: 18px;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    }
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body{
-  font-family:'Inter',sans-serif;
-  background:#050505;
-  color:#f4f4f4;
-  line-height:1.7;
-  overflow-x:hidden;
-  position:relative;
-}
+    html { scroll-behavior: smooth; }
 
-/* ================= LUXURY PATTERN GRECKI ================= */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-  background:
-    repeating-linear-gradient(90deg, rgba(212,175,55,.06) 0 2px, transparent 2px 30px),
-    repeating-linear-gradient(0deg, rgba(212,175,55,.04) 0 2px, transparent 2px 30px);
-  opacity:.25;
-}
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 8%, #152840 0%, transparent 35%),
+        radial-gradient(circle at 90% 90%, #2d1f11 0%, transparent 30%),
+        var(--bg);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
 
-/* ===== LIGHT SWEEP EFFECT ===== */
-body::after {
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:1;
-  background: linear-gradient(120deg, rgba(212,175,55,0) 0%, rgba(212,175,55,0.08) 50%, rgba(212,175,55,0) 100%);
-  transform: translateX(-100%);
-  animation: lightSweep 12s linear infinite;
-}
-@keyframes lightSweep {
-  0% { transform: translateX(-100%) skewX(-25deg); }
-  100% { transform: translateX(200%) skewX(-25deg); }
-}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: .25;
+      z-index: -1;
+    }
 
-/* ================= INTRO ================= */
-#intro{
-  position:fixed;
-  inset:0;
-  background:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-  animation:introFade 4.5s ease forwards;
-}
+    .container { width: min(1160px, 92%); margin: 0 auto; }
 
-.logo3d{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,6vw,4rem);
-  letter-spacing:2px;
-  padding:.6em .9em;
-  color:#d4af37;
-  text-shadow:
-    0 2px 0 #b08d2f,
-    0 10px 30px rgba(212,175,55,.7),
-    0 30px 80px rgba(0,0,0,.9);
-  animation:logoReveal 2.6s ease forwards;
-  word-break: break-word;
-  text-align:center;
-}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(11, 17, 27, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
 
-.logo3d span{
-  background:linear-gradient(120deg,#fff2b2,#d4af37,#b08d2f);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+    .topbar-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
 
-@keyframes logoReveal{
-  0%{opacity:0;transform:scale(.6);filter:blur(6px)}
-  100%{opacity:1;transform:scale(1);filter:blur(0)}
-}
+    .brand {
+      font-family: "Playfair Display", serif;
+      font-size: 1.2rem;
+      letter-spacing: .04em;
+      color: var(--gold-soft);
+    }
 
-@keyframes introFade{
-  0%,80%{opacity:1}
-  100%{opacity:0;visibility:hidden}
-}
+    nav { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
 
-/* ================= HERO ================= */
-header{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:2rem;
-  position:relative;
-}
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .94rem;
+      padding: .4rem .75rem;
+      border-radius: 999px;
+      transition: .2s;
+    }
 
-header::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at top, rgba(255,255,255,.1), rgba(212,175,55,.25), rgba(0,0,0,.7));
-  z-index:-1;
-}
+    nav a:hover { background: rgba(255,255,255,.08); color: var(--text); }
 
-header h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(3rem,6vw,4.5rem);
-  white-space:nowrap;
-  letter-spacing:0.5px; /* zmniejszony rozstaw liter */
-  padding:0 0.5rem; /* lekki padding po bokach */
-}
+    .hero {
+      padding: clamp(3rem, 9vw, 6.2rem) 0;
+    }
 
-header h1 span{
-  background:linear-gradient(120deg,#d4af37,#fff2b2,#b08d2f);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+    .hero-box {
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: clamp(1.4rem, 3.8vw, 3rem);
+      background: linear-gradient(150deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+    }
 
-header p{
-  max-width:760px;
-  margin-top:1.8rem;
-  font-size:1.25rem;
-  color:#e0e0e0;
-}
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: .78rem;
+      color: var(--gold);
+      margin-bottom: .8rem;
+    }
 
-/* ===== CTA BUTTONS ===== */
-.cta{
-  margin-top:1.5rem;
-  padding:1rem 2.8rem;
-  border-radius:50px;
-  border:1px solid rgba(212,175,55,.6);
-  background:rgba(255,255,255,.06);
-  color:#f5e6b8;
-  cursor:pointer;
-  transition:.4s;
-  font-size:1rem;
-}
+    h1, h2, h3 { font-family: "Playfair Display", serif; line-height: 1.12; }
 
-.cta:hover{
-  background:rgba(212,175,55,.25);
-  transform:translateY(-4px);
-  box-shadow:0 25px 50px rgba(212,175,55,.4);
-}
+    h1 {
+      font-size: clamp(2.2rem, 6.6vw, 4.5rem);
+      max-width: 15ch;
+      margin-bottom: 1.1rem;
+    }
 
-/* ================= SECTIONS ================= */
-section{padding:7rem 10%}
+    .lead {
+      max-width: 70ch;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.9vw, 1.15rem);
+    }
 
-.section-title{
-  font-family:'Playfair Display',serif;
-  font-size:2.8rem;
-  margin-bottom:3rem;
-  text-align:center;
-  color:#f5e6b8;
-}
+    .hero-cta { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: .8rem; }
 
-/* ================= VALUES ================= */
-.values-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:2.5rem;
-}
+    .btn {
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .45rem;
+      border: 1px solid transparent;
+      padding: .78rem 1.2rem;
+      font-weight: 600;
+      transition: .22s;
+      cursor: pointer;
+    }
 
-.card{
-  position:relative;
-  background:rgba(255,255,255,.05);
-  padding:3rem;
-  border-radius:26px;
-  overflow:hidden;
-  backdrop-filter:blur(18px);
-  box-shadow:0 40px 80px rgba(0,0,0,.6);
-  transition:.5s;
-}
+    .btn-primary {
+      background: linear-gradient(120deg, var(--gold), var(--gold-soft));
+      color: #271a08;
+      box-shadow: 0 10px 24px rgba(210, 173, 104, 0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); }
 
-.card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 50px 100px rgba(212,175,55,.35);
-}
+    .btn-secondary {
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.09); }
 
-.card-bg{
-  position:absolute;
-  inset:0;
-  background-size:cover;
-  background-position:center;
-  opacity:.18;
-  filter:blur(1px) saturate(1.2);
-  transform:scale(1.1);
-  transition:.6s ease;
-}
+    section { padding: clamp(2.3rem, 7vw, 5rem) 0; }
 
-.card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.85));
-}
+    h2 { font-size: clamp(1.7rem, 4.5vw, 2.6rem); margin-bottom: .6rem; }
 
-.card-content{
-  position:relative;
-  z-index:2;
-}
+    .sub { color: var(--muted); max-width: 65ch; }
 
-.card:hover .card-bg{
-  opacity:.35;
-  transform:scale(1.2);
-}
+    .grid {
+      display: grid;
+      gap: .95rem;
+      margin-top: 1.4rem;
+    }
 
-.icon{
-  font-size:2.6rem;
-  margin-bottom:1.4rem;
-  color:#d4af37;
-  text-shadow:0 12px 30px rgba(212,175,55,.6);
-}
+    .grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 
-/* ================= GALLERY ================= */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:2rem;
-}
+    .card {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 1.1rem;
+      box-shadow: var(--shadow);
+      transition: .2s;
+    }
 
-.gallery-item{
-  height:320px;
-  border-radius:28px;
-  background-size:cover;
-  background-position:center;
-  box-shadow:0 30px 60px rgba(0,0,0,.6);
-  transition:.6s;
-}
+    .card:hover { transform: translateY(-3px); border-color: var(--line-strong); }
 
-.gallery-item:hover{
-  transform:scale(1.05);
-  box-shadow:0 50px 100px rgba(212,175,55,.45);
-}
+    .stat {
+      font-size: 1.6rem;
+      color: var(--gold-soft);
+      font-weight: 700;
+      margin-bottom: .25rem;
+    }
 
-/* ================= FOOTER ================= */
-footer{
-  text-align:center;
-  padding:3rem 1rem;
-  color:#777;
-  font-size:.9rem;
-}
+    .timeline {
+      margin-top: 1.3rem;
+      border-left: 1px solid rgba(210,173,104,.55);
+      padding-left: 1rem;
+      display: grid;
+      gap: .95rem;
+    }
 
-/* ===== RESPONSIVE MOBILE FIX ===== */
-@media(max-width:480px){
-  header h1{
-    font-size:clamp(2rem,8vw,3rem);
-    letter-spacing:0.3px;
-    padding:0 0.3rem;
-  }
-  .logo3d{
-    font-size:clamp(1.6rem,8vw,3rem);
-    letter-spacing:1px;
-  }
-}
-</style>
+    .timeline small {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: .75rem;
+    }
+
+    .contact-panel {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.04);
+      padding: 1.3rem;
+    }
+
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .9rem; margin-top: 1rem; }
+
+    .assistant-toggle {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 35;
+      border: none;
+      border-radius: 999px;
+      padding: .86rem 1.05rem;
+      font-weight: 700;
+      background: linear-gradient(120deg, #2f6598, #88d3ff);
+      color: #071320;
+      box-shadow: 0 14px 30px rgba(72, 147, 206, .45);
+      cursor: pointer;
+    }
+
+    .assistant {
+      position: fixed;
+      right: 18px;
+      bottom: 74px;
+      width: min(380px, calc(100vw - 20px));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #111a28;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: none;
+      z-index: 34;
+    }
+
+    .assistant.open { display: block; }
+
+    .assistant-head {
+      padding: .8rem .95rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      background: rgba(142,199,255,.15);
+      gap: .6rem;
+    }
+
+    .assistant-head h4 { font-size: .96rem; }
+
+    .assistant-close {
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .chat {
+      min-height: 235px;
+      max-height: 300px;
+      overflow: auto;
+      padding: .9rem;
+      display: grid;
+      gap: .65rem;
+    }
+
+    .msg {
+      border-radius: 12px;
+      padding: .58rem .72rem;
+      font-size: .88rem;
+      max-width: 90%;
+    }
+
+    .bot { background: rgba(255,255,255,.08); border: 1px solid var(--line); }
+    .user { background: rgba(142,199,255,.16); border: 1px solid rgba(142,199,255,.38); margin-left: auto; }
+
+    .assistant-actions {
+      border-top: 1px solid var(--line);
+      padding: .75rem;
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      background: rgba(255,255,255,.03);
+    }
+
+    .chip {
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text);
+      padding: .35rem .62rem;
+      font-size: .76rem;
+      cursor: pointer;
+    }
+
+    .assistant-form {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .45rem;
+      padding: .75rem;
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+
+    .assistant-form input {
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(0,0,0,.2);
+      color: var(--text);
+      border-radius: 10px;
+      padding: .56rem .65rem;
+      outline: none;
+    }
+
+    .assistant-form button {
+      border: none;
+      border-radius: 10px;
+      padding: .56rem .72rem;
+      font-weight: 600;
+      background: var(--gold);
+      color: #25180a;
+      cursor: pointer;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,.1);
+      color: var(--muted);
+      padding: 1.6rem 0 2.2rem;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 760px) {
+      nav { display: none; }
+      .hero-box { border-radius: 22px; }
+      .assistant-toggle { right: 10px; bottom: 10px; }
+      .assistant { right: 10px; bottom: 65px; }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">Nowak & Partnerzy</div>
+      <nav>
+        <a href="#o-kancelarii">O kancelarii</a>
+        <a href="#specjalizacje">Specjalizacje</a>
+        <a href="#proces">Proces</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
 
-<div id="intro">
-  <div class="logo3d">Lucy<span>Epoxy</span>Studio</div>
-</div>
-
-<header>
-  <h1><span>Lucy</span>EpoxyStudio</h1>
-  <p>Ultra-lux meble i formy z żywicy epoksydowej. Ręcznie tworzone dzieła, które definiują przestrzeń.</p>
-  
-  <!-- PRZYCISKI PODSTRON -->
-  <button class="cta" onclick="window.location.href='zamow-project.html'">Zamów projekt premium</button>
-  <button class="cta" onclick="window.location.href='contact.html'">Kontakt</button>
-  <button class="cta" onclick="window.location.href='android-download.html'">Pobierz na Androida</button>
-</header>
-
-<section>
-  <h2 class="section-title">Dlaczego LucyEpoxyStudio</h2>
-
-  <div class="values-grid">
-
-    <div class="card">
-      <div class="card-bg" style="background-image:url('unikat.jpg')"></div>
-      <div class="card-content">
-        <div class="icon">✦</div>
-        <h3>Limitowane formy</h3>
-        <p>Każdy projekt powstaje jako unikat – bez powtórzeń i kompromisów.</p>
+  <main>
+    <section class="hero" id="o-kancelarii">
+      <div class="container hero-box">
+        <p class="kicker">Kancelaria adwokacka premium</p>
+        <h1>Skuteczna reprezentacja prawna dla klientów, którzy cenią klasę i konkrety.</h1>
+        <p class="lead">
+          Budujemy przewagę klienta poprzez strategię procesową, precyzyjne przygotowanie materiału dowodowego i pełną dyskrecję.
+          Styl współpracy: spokojny, transparentny, nastawiony na rezultat.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#kontakt">Umów konsultację</a>
+          <a class="btn btn-secondary" href="#specjalizacje">Poznaj specjalizacje</a>
+        </div>
       </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Wyniki, którym ufają klienci.</h2>
+        <p class="sub">Łączymy doświadczenie sali sądowej z nowoczesnym podejściem do prowadzenia spraw prywatnych i biznesowych.</p>
+        <div class="grid cols-3">
+          <article class="card"><p class="stat">+950</p><h3>Zakończonych postępowań</h3><p>Sprawy karne, cywilne, rodzinne i gospodarcze.</p></article>
+          <article class="card"><p class="stat">97%</p><h3>Spraw zgodnych z celem klienta</h3><p>W oparciu o realną ocenę ryzyka i scenariusze działania.</p></article>
+          <article class="card"><p class="stat">24h</p><h3>Pierwszy kontakt roboczy</h3><p>Szybka odpowiedź i kwalifikacja tematu przez zespół.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="specjalizacje">
+      <div class="container">
+        <h2>Specjalizacje kancelarii.</h2>
+        <p class="sub">Prowadzimy sprawy wymagające zarówno twardej argumentacji prawnej, jak i wyczucia reputacyjnego.</p>
+        <div class="grid cols-2">
+          <article class="card"><h3>Prawo karne i karne gospodarcze</h3><p>Obrona na każdym etapie postępowania, reprezentacja członków zarządów, postępowania prokuratorskie i sądowe.</p></article>
+          <article class="card"><h3>Spory cywilne i majątkowe</h3><p>Roszczenia o zapłatę, odszkodowania, sprawy umowne i nieruchomościowe dla klientów indywidualnych i firm.</p></article>
+          <article class="card"><h3>Prawo rodzinne i sukcesja</h3><p>Rozwody, podział majątku, zabezpieczenie interesów rodziny i ochrona prywatności w sprawach wrażliwych.</p></article>
+          <article class="card"><h3>Obsługa stała biznesu</h3><p>Kontrakty, ryzyka prawne, negocjacje i reprezentacja przedsiębiorców w sporach strategicznych.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proces">
+      <div class="container">
+        <h2>Jak wygląda współpraca.</h2>
+        <p class="sub">Bez chaosu i niedopowiedzeń — od pierwszej rozmowy wiesz, jaki jest plan, koszt i kolejne kroki.</p>
+        <div class="timeline">
+          <article><small>Krok 1</small><h3>Wstępna kwalifikacja</h3><p>Asystent AI zbiera podstawowe dane sprawy, a adwokat definiuje możliwe ścieżki działania.</p></article>
+          <article><small>Krok 2</small><h3>Strategia procesowa</h3><p>Przygotowujemy rekomendację: cele, ryzyka, harmonogram oraz warianty negocjacyjne/procesowe.</p></article>
+          <article><small>Krok 3</small><h3>Reprezentacja i raportowanie</h3><p>Prowadzimy sprawę i przekazujemy regularne, zrozumiałe aktualizacje dla klienta.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <div class="container contact-panel">
+        <h2>Umów poufną konsultację.</h2>
+        <p class="sub">Skontaktuj się telefonicznie lub mailowo — wracamy z informacją roboczą maksymalnie do 24 godzin.</p>
+        <div class="contact-grid">
+          <article class="card"><h3>Adres</h3><p>ul. Marszałkowska 100<br>00-001 Warszawa</p></article>
+          <article class="card"><h3>Kontakt</h3><p>+48 500 000 000<br>kontakt@nowak-partnerzy.pl</p></article>
+          <article class="card"><h3>Dostępność</h3><p>Pon.–Pt. 8:00–20:00<br>Spotkania online i stacjonarnie</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="assistant-toggle" id="assistantToggle">✨ Asystent AI</button>
+
+  <aside class="assistant" id="assistant" aria-label="Wirtualny asystent kancelarii">
+    <div class="assistant-head">
+      <h4>Wirtualny asystent kancelarii</h4>
+      <button class="assistant-close" id="assistantClose" aria-label="Zamknij">✕</button>
     </div>
 
-    <div class="card">
-      <div class="card-bg" style="background-image:url('rzemioslo.jpg')"></div>
-      <div class="card-content">
-        <div class="icon">⌂</div>
-        <h3>Rzemiosło & precyzja</h3>
-        <p>Ręczna selekcja drewna, perfekcyjne wykończenie i dbałość o detal.</p>
-      </div>
+    <div class="chat" id="chat">
+      <div class="msg bot">Dzień dobry. Pomogę wstępnie opisać sprawę i przygotować dane do kontaktu z adwokatem.</div>
     </div>
 
-    <div class="card">
-      <div class="card-bg" style="background-image:url('design.jpg')"></div>
-      <div class="card-content">
-        <div class="icon">◈</div>
-        <h3>Design ultra-lux</h3>
-        <p>Produkty klasy galerii sztuki i luksusowych wnętrz.</p>
-      </div>
+    <div class="assistant-actions">
+      <button class="chip" data-q="Potrzebuję pilnej konsultacji karnej">Pilna konsultacja</button>
+      <button class="chip" data-q="Sprawa rozwodowa i podział majątku">Sprawa rodzinna</button>
+      <button class="chip" data-q="Spór o umowę i zapłatę">Sprawa gospodarcza</button>
     </div>
 
-  </div>
-</section>
+    <form class="assistant-form" id="assistantForm">
+      <input id="assistantInput" type="text" placeholder="Opisz temat w 1-2 zdaniach..." maxlength="220" />
+      <button type="submit">Wyślij</button>
+    </form>
+  </aside>
 
-<section>
-  <h2 class="section-title">Wybrane realizacje</h2>
-  <div class="gallery">
-    <div class="gallery-item" style="background-image:url('projekt1.jpg')"></div>
-    <div class="gallery-item" style="background-image:url('projekt2.jpg')"></div>
-    <div class="gallery-item" style="background-image:url('projekt3.jpg')"></div>
-    <div class="gallery-item" style="background-image:url('projekt4.jpg')"></div>
-    <div class="gallery-item" style="background-image:url('foto1.jpg')"></div>
-    <div class="gallery-item" style="background-image:url('foto2.jpg')"></div>
-    <div class="gallery-item" style="background-image:url('foto3.jpg')"></div>
-    <div class="gallery-item" style="background-image:url('foto4.jpg')"></div>
-    <div class="gallery-item" style="background-image:url('foto5.jpg')"></div>
-  </div>
-</section>
+  <footer>
+    <div class="container">© 2026 Kancelaria Adwokacka Nowak & Partnerzy — strategia, skuteczność, dyskrecja.</div>
+  </footer>
 
-<footer>
-© LucyEpoxyStudio · Ultra-Lux Design · Ręcznie · Unikatowo
-</footer>
+  <script>
+    const assistant = document.getElementById("assistant");
+    const toggle = document.getElementById("assistantToggle");
+    const closeBtn = document.getElementById("assistantClose");
+    const chat = document.getElementById("chat");
+    const form = document.getElementById("assistantForm");
+    const input = document.getElementById("assistantInput");
 
+    const canned = {
+      "Potrzebuję pilnej konsultacji karnej": "W sprawach pilnych prosimy o telefon pod numer +48 500 000 000. Jeżeli chcesz, przygotuję listę danych, które przyspieszą analizę.",
+      "Sprawa rozwodowa i podział majątku": "Wstępnie potrzebne będą: akt małżeństwa, opis sytuacji majątkowej oraz informacje o dzieciach. Adwokat zaproponuje plan działania po analizie.",
+      "Spór o umowę i zapłatę": "Do oceny warto przygotować umowę, aneksy, korespondencję i potwierdzenia płatności. To pozwala szybko oszacować szanse i ryzyka."
+    };
+
+    function addMessage(text, role) {
+      const div = document.createElement("div");
+      div.className = `msg ${role}`;
+      div.textContent = text;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function respond(question) {
+      const response = canned[question] || "Dziękuję za opis. To dobry punkt startu. Zespół kancelarii skontaktuje się, aby ustalić dalsze kroki i dokumenty.";
+      setTimeout(() => addMessage(response, "bot"), 320);
+    }
+
+    toggle.addEventListener("click", () => {
+      assistant.classList.toggle("open");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      assistant.classList.remove("open");
+    });
+
+    document.querySelectorAll(".chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const q = chip.dataset.q;
+        addMessage(q, "user");
+        respond(q);
+      });
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const q = input.value.trim();
+      if (!q) return;
+      addMessage(q, "user");
+      input.value = "";
+      respond(q);
+    });
+  </script>
 </body>
 </html>
