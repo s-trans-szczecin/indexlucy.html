@@ -116,6 +116,8 @@ footer {
 .orbit-shell {
   position: absolute;
   inset: 0;
+  transform-style: preserve-3d;
+  animation: orbit-rotate 4.2s linear infinite;
 }
 
 .orbit-ring {
@@ -141,7 +143,10 @@ footer {
   border-radius: 999px;
   border: 1px solid rgba(245, 158, 11, .45);
   box-shadow: 0 0 20px rgba(245, 158, 11, .2);
-  animation: orbit-depth 8s linear infinite;
+  transform: translate(-50%, -50%) translateY(-152px) rotate(0deg);
+  transform-origin: center 152px;
+  animation: orbit-label-counter 4.2s linear infinite;
+  z-index: 1;
 }
 
 .garage-scene {
@@ -190,51 +195,51 @@ footer {
 
 .car {
   position: absolute;
-  left: -110px;
+  left: -118px;
   bottom: 0;
-  width: 108px;
-  height: 44px;
+  width: 122px;
+  height: 42px;
   animation: car-drive 6s ease-in-out infinite;
   filter: drop-shadow(0 4px 10px rgba(239, 68, 68, .35));
 }
 
 .car-body {
   position: absolute;
-  inset: 12px 0 4px 0;
-  background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
-  border-radius: 10px 26px 8px 12px;
-  border: 2px solid #fecaca;
+  inset: 14px 0 3px 0;
+  background: linear-gradient(135deg, #ff3b30 0%, #b10f0f 55%, #7f0d0d 100%);
+  border-radius: 10px 30px 8px 18px;
+  border: 2px solid #ffd4d4;
 }
 
 .car-cockpit {
   position: absolute;
-  left: 28px;
-  top: 5px;
-  width: 45px;
-  height: 16px;
-  border-radius: 12px 14px 8px 8px;
-  background: linear-gradient(180deg, #a5f3fc 0%, #1e3a8a 100%);
-  border: 2px solid #e2e8f0;
+  left: 38px;
+  top: 4px;
+  width: 52px;
+  height: 15px;
+  border-radius: 18px 18px 10px 10px;
+  background: linear-gradient(180deg, #111827 0%, #334155 100%);
+  border: 1px solid #cbd5e1;
 }
 
 .car-spoiler {
   position: absolute;
-  left: 6px;
+  left: 4px;
   top: 10px;
-  width: 20px;
-  height: 5px;
+  width: 24px;
+  height: 4px;
   border-radius: 4px;
-  background: #fee2e2;
+  background: #f8fafc;
 }
 
 .car-front-wing {
   position: absolute;
-  right: -4px;
-  top: 19px;
-  width: 14px;
-  height: 8px;
+  right: -6px;
+  top: 20px;
+  width: 18px;
+  height: 7px;
   border-radius: 0 6px 6px 0;
-  background: #fca5a5;
+  background: #fecaca;
 }
 
 .wheel {
@@ -246,34 +251,36 @@ footer {
   background: #111827;
   border: 2px solid #e2e8f0;
 }
-.wheel.left { left: 12px; }
-.wheel.right { right: 12px; }
+.wheel.left { left: 14px; }
+.wheel.right { right: 14px; }
 
-@keyframes orbit-depth {
+@keyframes orbit-rotate {
+  0% { transform: rotate(0deg); }
+  49% { z-index: 1; }
+  50% { z-index: 5; }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes orbit-label-counter {
   0% {
-    transform: translate(-50%, -50%) translate3d(0, -148px, 0) scale(.8);
+    transform: translate(-50%, -50%) rotate(0deg) translateY(-152px) rotate(0deg) scale(.84);
     opacity: .42;
-    z-index: 1;
   }
-  24% {
-    transform: translate(-50%, -50%) translate3d(128px, -10px, 0) scale(.92);
-    opacity: .7;
-    z-index: 2;
+  25% {
+    transform: translate(-50%, -50%) rotate(-90deg) translateY(-152px) rotate(90deg) scale(.92);
+    opacity: .74;
   }
-  49% {
-    transform: translate(-50%, -50%) translate3d(0, 138px, 0) scale(1.08);
+  50% {
+    transform: translate(-50%, -50%) rotate(-180deg) translateY(-152px) rotate(180deg) scale(1.08);
     opacity: 1;
-    z-index: 5;
   }
-  74% {
-    transform: translate(-50%, -50%) translate3d(-128px, -10px, 0) scale(.92);
-    opacity: .7;
-    z-index: 2;
+  75% {
+    transform: translate(-50%, -50%) rotate(-270deg) translateY(-152px) rotate(270deg) scale(.92);
+    opacity: .74;
   }
   100% {
-    transform: translate(-50%, -50%) translate3d(0, -148px, 0) scale(.8);
+    transform: translate(-50%, -50%) rotate(-360deg) translateY(-152px) rotate(360deg) scale(.84);
     opacity: .42;
-    z-index: 1;
   }
 }
 
