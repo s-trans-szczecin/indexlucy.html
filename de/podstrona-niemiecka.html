@@ -3,50 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LucyEpoxyStudio</title>
+<title>LucyEpoxyStudio | Epoxidharz Möbel Deutschland</title>
+<meta name="description" content="LucyEpoxyStudio - Premium Epoxidharz Möbel.">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-font-family:Inter,sans-serif;
+font-family:'Inter',sans-serif;
 background:#050505;
-color:#fff;
+color:#f4f4f4;
+line-height:1.7;
 overflow-x:hidden;
+position:relative;
 }
 
-/* ===== GALAXY BACKGROUND (WORKING 100%) ===== */
-.hero-bg{
+/* GRID BACKGROUND */
+body::before{
+content:"";
 position:fixed;
 inset:0;
-z-index:-2;
+pointer-events:none;
+z-index:0;
 background:
-radial-gradient(circle at 20% 30%, rgba(255,215,0,.25), transparent 40%),
-radial-gradient(circle at 70% 60%, rgba(0,180,255,.15), transparent 50%),
-radial-gradient(circle at 40% 80%, rgba(160,80,255,.15), transparent 55%),
-radial-gradient(circle at 60% 20%, rgba(255,255,255,.08), transparent 60%),
-linear-gradient(120deg,#050505,#0a0a0a);
-animation:move 18s ease-in-out infinite;
-filter:contrast(1.2) saturate(1.2);
+repeating-linear-gradient(90deg, rgba(212,175,55,.06) 0 2px, transparent 2px 30px),
+repeating-linear-gradient(0deg, rgba(212,175,55,.04) 0 2px, transparent 2px 30px);
+opacity:.25;
 }
 
-@keyframes move{
-0%{transform:scale(1.1) translateX(-2%) translateY(-1%)}
-50%{transform:scale(1.2) translateX(3%) translateY(2%)}
-100%{transform:scale(1.1) translateX(-2%) translateY(-1%)}
-}
-
-/* overlay for readability */
-.overlay{
-position:fixed;
-inset:0;
-z-index:-1;
-background:radial-gradient(circle, rgba(0,0,0,.2), rgba(0,0,0,.85));
-}
-
-/* ===== HEADER ===== */
+/* HEADER */
 header{
 min-height:100vh;
 display:flex;
@@ -58,9 +45,18 @@ padding:2rem;
 position:relative;
 }
 
+header::before{
+content:"";
+position:absolute;
+inset:0;
+background:radial-gradient(circle at top, rgba(255,255,255,.1), rgba(212,175,55,.25), rgba(0,0,0,.7));
+z-index:-1;
+}
+
+/* TYPO */
 h1{
-font-family:"Playfair Display",serif;
-font-size:clamp(2.5rem,6vw,4.5rem);
+font-family:'Playfair Display',serif;
+font-size:clamp(3rem,6vw,4.5rem);
 }
 
 h1 span{
@@ -70,90 +66,110 @@ background:linear-gradient(120deg,#d4af37,#fff2b2,#b08d2f);
 }
 
 .hero-text{
-max-width:700px;
-margin-top:20px;
-color:#ddd;
+max-width:760px;
+margin-top:1.2rem;
+font-size:1.2rem;
+color:#e0e0e0;
 }
 
-/* ===== BUTTONS ===== */
-.nav{
-margin-top:30px;
+/* BUTTONS */
+.nav-buttons{
+margin-top:2rem;
 display:flex;
 flex-wrap:wrap;
-gap:10px;
 justify-content:center;
+gap:.8rem;
 }
 
-.btn{
-padding:12px 18px;
-border-radius:30px;
-border:1px solid gold;
+.cta{
+display:inline-block;
+padding:1rem 1.7rem;
+border-radius:50px;
+border:1px solid rgba(212,175,55,.6);
+background:rgba(255,255,255,.06);
 color:#f5e6b8;
 text-decoration:none;
-transition:.3s;
+transition:.4s;
 }
 
-.btn:hover{
-background:gold;
-color:black;
+.cta:hover{
+background:rgba(212,175,55,.25);
+transform:translateY(-4px);
+box-shadow:0 25px 50px rgba(212,175,55,.4);
 }
 
-/* ===== LOGO ===== */
-.logo{
+/* LOGO (LEFT, SPINNING) */
+.corner-logo{
 position:fixed;
 top:14px;
 left:14px;
-width:90px;
-animation:spin 8s linear infinite;
-z-index:1000;
+z-index:10001;
+width:min(18vw,130px);
+min-width:84px;
+animation:logoSpin 8s linear infinite;
+transform-origin:center center;
 }
 
-.logo img{
+.corner-logo img{
+display:block;
 width:100%;
-border-radius:10px;
-filter:drop-shadow(0 8px 18px rgba(0,0,0,.5));
+height:auto;
+filter:drop-shadow(0 8px 18px rgba(0,0,0,.45));
+border-radius:12px;
 }
 
-@keyframes spin{
+@keyframes logoSpin{
 0%{transform:rotateY(0deg)}
 100%{transform:rotateY(360deg)}
 }
 
-/* ===== MOBILE FIX ===== */
+/* MOBILE FIX */
 @media(max-width:768px){
-h1{font-size:2rem;line-height:1.2}
-.hero-text{padding:0 10px}
-.logo{width:65px;top:10px;left:10px}
-header{padding-top:100px}
+
+.corner-logo{
+top:10px;
+left:10px;
+width:70px;
+min-width:70px;
+}
+
+header{
+padding-top:90px;
+}
+
+h1{
+font-size:clamp(2rem,8vw,3rem);
+line-height:1.1;
+word-break:break-word;
+}
+
+.hero-text{
+padding:0 10px;
+}
 }
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
-<div class="hero-bg"></div>
-<div class="overlay"></div>
-
-<!-- LOGO -->
-<div class="logo">
-<img src="/images/logoLEC.png" alt="logo">
+<div class="corner-logo">
+<img src="/images/logoLEC.png" alt="Lucy Epoxy Studio logo">
 </div>
 
-<!-- CONTENT -->
 <header>
 <h1><span>Lucy</span>EpoxyStudio</h1>
 
 <p class="hero-text">
-Exklusive Epoxidharz Möbel und Premium Design für den deutschen Markt.
+Exklusive Epoxidharz-Möbel und handgefertigte Premium-Designs für den deutschen Markt.
 </p>
 
-<div class="nav">
-<a class="btn" href="../index.html">Polska</a>
-<a class="btn" href="../en/index.html">English</a>
-<a class="btn" href="premium-projekt.html">Premium</a>
-<a class="btn" href="kontakt.html">Kontakt</a>
-<a class="btn" href="realisierungen.html">Projekte</a>
+<div class="nav-buttons">
+<a class="cta" href="../index.html">Polska</a>
+<a class="cta" href="../en/index.html">English</a>
+<a class="cta" href="premium-projekt.html">Premium Projekt</a>
+<a class="cta" href="kontakt.html">Kontakt</a>
+<a class="cta" href="android-app.html">Android App</a>
+<a class="cta" href="realisierungen.html">Realisierungen</a>
 </div>
 
 </header>
