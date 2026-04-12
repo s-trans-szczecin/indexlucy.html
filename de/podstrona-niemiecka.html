@@ -49,6 +49,34 @@ border-radius:12px
 0%{transform:rotateY(0deg)}
 100%{transform:rotateY(360deg)}
 }
+
+/* ===== MOBILE FIX ===== */
+@media(max-width:768px){
+
+.corner-logo{
+top:10px;
+left:10px;
+width:70px;
+min-width:70px;
+}
+
+header{
+padding-top:90px;
+}
+
+h1{
+font-size:clamp(2rem,8vw,3rem);
+line-height:1.1;
+word-break:break-word;
+display:flex;
+flex-direction:column;
+}
+
+.hero-text{
+padding:0 10px;
+}
+
+}
 </style>
 </head>
 
