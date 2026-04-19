@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LucyEpoxyStudio | Cosmic Rebuild Core</title>
+<title>LucyEpoxyStudio | Cosmic Luxury</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -15,9 +15,10 @@ font-family:'Inter',sans-serif;
 background:#050505;
 overflow:hidden;
 height:100vh;
+color:#f4f4f4;
 }
 
-/* ================= SPACE ================= */
+/* ================= GALAXY ================= */
 
 .scene{
 position:fixed;
@@ -64,7 +65,6 @@ width:320px;
 height:320px;
 transform:translate(-50%,-50%);
 background:url("/indexlucy.html/public/images/galaxy-core.png") center/contain no-repeat;
-
 animation:
 coreSpinLeft 14s linear infinite,
 coreFlatten 6s ease-in-out infinite;
@@ -99,7 +99,31 @@ font-size:clamp(2.5rem,6vw,4rem);
 background:linear-gradient(120deg,#d4af37,#fff2b2,#b08d2f);
 -webkit-background-clip:text;
 color:transparent;
-position:relative;
+}
+
+/* ================= MENU (RESTORED) ================= */
+
+.nav{
+margin-top:25px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.nav a{
+padding:10px 16px;
+border-radius:30px;
+border:1px solid rgba(212,175,55,.5);
+color:#f5e6b8;
+text-decoration:none;
+background:rgba(0,0,0,.35);
+backdrop-filter:blur(8px);
+font-size:.85rem;
+}
+
+.nav a:hover{
+background:rgba(212,175,55,.2);
 }
 
 /* ================= PARTICLES ================= */
@@ -113,7 +137,6 @@ color:#d4af37;
 pointer-events:none;
 text-shadow:0 0 10px rgba(212,175,55,.8);
 animation:fly 1.6s ease-out forwards;
-will-change:transform,opacity;
 }
 
 @keyframes fly{
@@ -121,21 +144,14 @@ will-change:transform,opacity;
 100%{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}
 }
 
-/* ================= REBUILD MODE ================= */
-
+/* rebuild */
 .particle.rebuild{
 animation:rebuild 1.4s ease-in forwards !important;
 }
 
 @keyframes rebuild{
-0%{
-transform:translate(var(--x),var(--y)) scale(.2);
-opacity:0;
-}
-100%{
-transform:translate(0,0) scale(1);
-opacity:1;
-}
+0%{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}
+100%{transform:translate(0,0) scale(1);opacity:1}
 }
 
 </style>
@@ -150,35 +166,43 @@ opacity:1;
 </div>
 
 <div class="hero">
+
 <h1 id="brand">LucyEpoxyStudio</h1>
+
+<div class="nav">
+<a href="../index.html">PL</a>
+<a href="../en/index.html">EN</a>
+<a href="realisierungen.html">Projects</a>
+<a href="kontakt.html">Contact</a>
+<a href="android-app.html">App</a>
+</div>
+
 </div>
 
 <script>
-const text = document.getElementById("brand");
+const text=document.getElementById("brand");
 
-let spans = [];
-let particles = [];
+let spans=[];
+let particles=[];
 
 function explode(){
 
-const letters = text.innerText.split("");
-text.innerHTML = "";
+const letters=text.innerText.split("");
+text.innerHTML="";
 
-letters.forEach((char,i)=>{
-
-const span=document.createElement("span");
-span.innerText=char;
-text.appendChild(span);
-
+letters.forEach(c=>{
+const s=document.createElement("span");
+s.innerText=c;
+text.appendChild(s);
 });
 
 requestAnimationFrame(()=>{
 
-spans = text.querySelectorAll("span");
+spans=text.querySelectorAll("span");
 
 spans.forEach((span,i)=>{
 
-const rect = span.getBoundingClientRect();
+const rect=span.getBoundingClientRect();
 
 for(let j=0;j<2;j++){
 const p=document.createElement("div");
@@ -209,29 +233,14 @@ setTimeout(rebuild,1800);
 
 function rebuild(){
 
-particles.forEach((p,i)=>{
-
-p.classList.remove("particle");
+particles.forEach(p=>{
 p.classList.add("rebuild");
-
-setTimeout(()=>{
-
-if(spans[i]){
-spans[i].style.opacity="1";
-}
-
-p.remove();
-
-},1400);
-
+setTimeout(()=>p.remove(),1400);
 });
 
 setTimeout(()=>{
-
-text.innerHTML = "LucyEpoxyStudio";
-
+text.innerHTML="LucyEpoxyStudio";
 setTimeout(explode,2500);
-
 },1500);
 
 }
