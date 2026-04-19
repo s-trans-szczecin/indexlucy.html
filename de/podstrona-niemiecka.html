@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LucyEpoxyStudio | Luxury Gravity Core</title>
+<title>LucyEpoxyStudio | Cosmic Luxury Core</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -25,7 +25,8 @@ inset:0;
 z-index:-2;
 }
 
-/* GALAXY BASE */
+/* GALAXY LEFT / RIGHT */
+
 .left,.right{
 position:absolute;
 top:50%;
@@ -42,7 +43,6 @@ filter:blur(1px) saturate(1.3);
 .left{background-image:url("/indexlucy.html/public/images/galaxy-left.png");}
 .right{background-image:url("/indexlucy.html/public/images/galaxy-right.png");}
 
-/* soft drift */
 .left{animation:driftL 20s ease-in-out infinite;}
 .right{animation:driftR 24s ease-in-out infinite;}
 
@@ -68,65 +68,49 @@ transform:translate(-50%,-50%);
 background:url("/indexlucy.html/public/images/galaxy-core.png") center/contain no-repeat;
 filter:drop-shadow(0 0 90px rgba(0,0,0,.95));
 
-/* 🔥 LEFT SPIN + COLLAPSE */
 animation:
 coreSpinLeft 14s linear infinite,
 coreFlatten 6s ease-in-out infinite;
 }
 
-/* obrót w LEWO */
 @keyframes coreSpinLeft{
 0%{transform:translate(-50%,-50%) rotate(0deg)}
 100%{transform:translate(-50%,-50%) rotate(-360deg)}
 }
 
-/* spłaszczanie + oddychanie */
 @keyframes coreFlatten{
 0%,100%{transform:translate(-50%,-50%) scale(1,1)}
 50%{transform:translate(-50%,-50%) scale(1.25,.75)}
 }
 
-/* ================= FLASH FIELD ================= */
+/* ================= FLASHES ================= */
 
-.flash{
+.flash,.flash2,.flash3{
 position:absolute;
 top:50%;
 left:50%;
-width:140px;
-height:140px;
 border-radius:50%;
-background:white;
 opacity:0;
-filter:blur(35px);
 mix-blend-mode:screen;
+filter:blur(40px);
+transform:translate(-50%,-50%);
+}
+
+.flash{
+width:140px;height:140px;
+background:white;
 animation:flashMain 5s ease-in-out infinite;
 }
 
 .flash2{
-position:absolute;
-top:40%;
-left:60%;
-width:220px;
-height:220px;
-border-radius:50%;
-background:rgba(255,255,255,.6);
-opacity:0;
-filter:blur(40px);
-mix-blend-mode:screen;
+width:220px;height:220px;
+background:rgba(255,255,255,.5);
 animation:flash2 7s ease-in-out infinite;
 }
 
 .flash3{
-position:absolute;
-top:60%;
-left:40%;
-width:320px;
-height:320px;
-border-radius:50%;
-background:rgba(212,175,55,.4);
-opacity:0;
-filter:blur(50px);
-mix-blend-mode:screen;
+width:320px;height:320px;
+background:rgba(212,175,55,.3);
 animation:flash3 9s ease-in-out infinite;
 }
 
@@ -148,15 +132,6 @@ animation:flash3 9s ease-in-out infinite;
 92%{opacity:0}
 }
 
-/* ================= DARK ================= */
-
-.dark{
-position:fixed;
-inset:0;
-background:radial-gradient(circle,rgba(0,0,0,.1),rgba(0,0,0,.95));
-z-index:-3;
-}
-
 /* ================= LOGO ================= */
 
 .logo{
@@ -166,16 +141,18 @@ left:14px;
 width:100px;
 z-index:1000;
 }
+
 .logo img{
 width:100%;
 animation:spin 8s linear infinite;
 }
+
 @keyframes spin{
 0%{transform:rotateY(0)}
 100%{transform:rotateY(360deg)}
 }
 
-/* ================= HERO TEXT ================= */
+/* ================= HERO ================= */
 
 .hero{
 position:relative;
@@ -188,7 +165,7 @@ justify-content:center;
 text-align:center;
 }
 
-/* GOLD TEXT + SPARKLES */
+/* GOLD TEXT */
 h1{
 font-family:'Playfair Display';
 font-size:clamp(3rem,6vw,4rem);
@@ -199,30 +176,29 @@ background:linear-gradient(120deg,#d4af37,#fff2b2,#b08d2f);
 -webkit-background-clip:text;
 }
 
-/* SPARKLES OVER TEXT */
+/* sparkles */
 h1::before,
 h1::after{
 content:"";
 position:absolute;
-inset:-20px;
+inset:-30px;
 background:
-radial-gradient(circle at 20% 30%,rgba(255,255,255,.8),transparent 6px),
-radial-gradient(circle at 70% 60%,rgba(255,255,255,.6),transparent 5px),
-radial-gradient(circle at 40% 80%,rgba(255,255,255,.4),transparent 4px);
-opacity:.8;
-filter:blur(.5px);
+radial-gradient(circle at 20% 30%,white,transparent 5px),
+radial-gradient(circle at 70% 60%,white,transparent 4px),
+radial-gradient(circle at 40% 80%,white,transparent 3px);
+opacity:.7;
 animation:sparkle 3s infinite alternate;
 pointer-events:none;
 }
 
 @keyframes sparkle{
-0%{transform:scale(1);opacity:.4}
-100%{transform:scale(1.1);opacity:.9}
+0%{opacity:.3;transform:scale(1)}
+100%{opacity:1;transform:scale(1.1)}
 }
 
 /* NAV */
 .nav{
-margin-top:25px;
+margin-top:20px;
 display:flex;
 gap:10px;
 flex-wrap:wrap;
@@ -237,11 +213,24 @@ color:#f5e6b8;
 text-decoration:none;
 background:rgba(0,0,0,.35);
 backdrop-filter:blur(8px);
-font-size:.85rem;
 }
 
-.nav a:hover{
-background:rgba(212,175,55,.2);
+/* ================= PARTICLES ================= */
+
+.particle{
+position:absolute;
+pointer-events:none;
+font-family:'Playfair Display',serif;
+font-size:2rem;
+font-weight:700;
+color:#d4af37;
+animation:fly 1.6s ease-out forwards;
+text-shadow:0 0 10px rgba(212,175,55,.8);
+}
+
+@keyframes fly{
+0%{transform:translate(0,0) scale(1);opacity:1}
+100%{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}
 }
 
 </style>
@@ -260,14 +249,12 @@ background:rgba(212,175,55,.2);
   <div class="core"></div>
 </div>
 
-<div class="dark"></div>
-
 <div class="logo">
 <img src="/images/logoLEC.png">
 </div>
 
 <div class="hero">
-<h1>LucyEpoxyStudio</h1>
+<h1 id="brand">LucyEpoxyStudio</h1>
 
 <div class="nav">
 <a href="../index.html">PL</a>
@@ -277,6 +264,54 @@ background:rgba(212,175,55,.2);
 </div>
 
 </div>
+
+<script>
+const text = document.getElementById("brand");
+
+function explodeText(){
+
+const letters = text.innerText.split("");
+text.innerHTML = "";
+
+letters.forEach((char,i)=>{
+
+const span = document.createElement("span");
+span.innerText = char;
+text.appendChild(span);
+
+setTimeout(()=>{
+
+const rect = span.getBoundingClientRect();
+
+for(let j=0;j<2;j++){
+const p = document.createElement("div");
+p.className="particle";
+p.innerText=char;
+
+const angle=Math.random()*Math.PI*2;
+const dist=50+Math.random()*120;
+
+p.style.left=rect.left+"px";
+p.style.top=rect.top+"px";
+p.style.setProperty("--x",Math.cos(angle)*dist+"px");
+p.style.setProperty("--y",Math.sin(angle)*dist-80+"px");
+
+document.body.appendChild(p);
+setTimeout(()=>p.remove(),1600);
+}
+
+span.style.opacity="0";
+
+}, i*120);
+
+});
+
+}
+
+window.addEventListener("load",()=>{
+setTimeout(explodeText,1200);
+});
+</script>
 
 </body>
 </html>
