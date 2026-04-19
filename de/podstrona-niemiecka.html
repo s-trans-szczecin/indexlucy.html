@@ -220,109 +220,34 @@ transition:transform .2s,box-shadow .3s;
 .nav a:hover{
 box-shadow:0 0 25px rgba(212,175,55,0.25);
 }
+
+/* ================= MOBILE STABILITY ================= */
+@media (max-width:768px){
+
+.left,.right{
+animation-duration:60s !important;
+filter:blur(.5px) saturate(1.1);
+}
+
+@keyframes driftL{
+0%,100%{transform:translate(-50%,-50%) rotate(0deg)}
+50%{transform:translate(-50.5%,-50%) rotate(-1.5deg)}
+}
+
+@keyframes driftR{
+0%,100%{transform:translate(-50%,-50%) rotate(0deg)}
+50%{transform:translate(-49.5%,-50%) rotate(1.5deg)}
+}
+
+.core{
+animation:
+coreSpin 60s linear infinite,
+corePulse 10s ease-in-out infinite;
+}
+
+.nav{
+transition:none;
+}
+
+}
 </style>
-</head>
-
-<body>
-
-<div class="corner-logo">
-  <div class="corner-logo"><img src="/images/logoLEC.png" alt="Lucy Epoxy Studio logo" onerror="if(!this.dataset.step){this.dataset.step='1';this.src='images/logoLEC.png';}else if(this.dataset.step==='1'){this.dataset.step='2';this.src='public/images/logoLEC.png';}else if(this.dataset.step==='2'){this.dataset.step='3';this.src='/images/logoLEC.png';}else if(this.dataset.step==='3'){this.dataset.step='4';this.src='logoLEC.png';}else if(this.dataset.step==='4'){this.dataset.step='5';this.src='/logoLEC.png';}else if(this.dataset.step==='5'){this.dataset.step='6';this.src='images/logoLEC.PNG';}else{this.onerror=null;this.src='/favicon.svg';}"></div>
-
-</div>
-
-<div class="scene">
-<div class="left"></div>
-<div class="right"></div>
-<div class="core"></div>
-</div>
-
-<div class="hero">
-<h1 id="brand">LucyEpoxyStudio</h1>
-
-<div class="nav" id="glassNav">
-<a href="/indexlucy.html/index.html">Sprache: Polnisch</a>
-<a href="/indexlucy.html/en/index.html">Sprache: Englisch</a>
-<a href="/indexlucy.html/de/realisierungen.html">Projekte</a>
-<a href="/indexlucy.html/de/kontakt.html">Kontakt</a>
-<a href="/indexlucy.html/de/android-app.html">App herunterladen</a>
-</div>
-</div>
-
-<script>
-
-/* CORE FLARES */
-for(let i=0;i<36;i++){
-const f=document.createElement("div");
-f.className="flare";
-f.style.left=50+Math.random()*10-5+"%";
-f.style.top=50+Math.random()*10-5+"%";
-f.style.setProperty("--x",(Math.random()*240-120)+"px");
-f.style.setProperty("--y",(Math.random()*240-120)+"px");
-f.style.animationDelay=Math.random()*3+"s";
-document.body.appendChild(f);
-}
-
-/* SUPERNOVA BURSTS */
-function spawnSupernova(){
-const s=document.createElement("div");
-const sizes=["small","medium","big"];
-s.className="supernova "+sizes[Math.floor(Math.random()*sizes.length)];
-
-s.style.left=Math.random()*100+"vw";
-s.style.top=Math.random()*100+"vh";
-
-s.style.setProperty("--x",(Math.random()*500-250)+"px");
-s.style.setProperty("--y",(Math.random()*500-250)+"px");
-
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),5000);
-}
-
-setInterval(()=>{
-spawnSupernova();
-spawnSupernova();
-},600);
-
-/* camera flash near menu */
-function spawnFlash(){
-const nav=document.getElementById("glassNav");
-const rect=nav.getBoundingClientRect();
-
-const f=document.createElement("div");
-f.className="camera-flash";
-
-f.style.left=(rect.left+Math.random()*rect.width)+"px";
-f.style.top=(rect.top+Math.random()*rect.height)+"px";
-
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),2800);
-}
-
-setInterval(()=>{for(let i=0;i<6;i++)spawnFlash()},450);
-
-/* AI gravity menu */
-const nav=document.getElementById("glassNav");
-const items=nav.querySelectorAll("a");
-
-document.addEventListener("mousemove",(e)=>{
-const centerX=window.innerWidth/2;
-const centerY=window.innerHeight/2;
-
-const moveX=(e.clientX-centerX)*0.01;
-const moveY=(e.clientY-centerY)*0.01;
-
-nav.style.transform=`translate(${moveX}px,${moveY}px)`;
-
-items.forEach(el=>{
-const r=el.getBoundingClientRect();
-const dx=centerX-(r.left+r.width/2);
-const dy=centerY-(r.top+r.height/2);
-const dist=Math.sqrt(dx*dx+dy*dy);
-const force=Math.min(40/dist,0.6);
-el.style.transform=`translate(${dx*force*0.1}px,${dy*force*0.1}px)`;
-});
-});
-</script>
-
-</body>
-</html>
