@@ -19,6 +19,32 @@ overflow-x:hidden;
 position:relative;
 }
 
+/* GALAXY BACKGROUND */
+.galaxy-bg{
+position:fixed;
+inset:-20%;
+z-index:-2;
+background:url("/indexlucy.html/public/images/galaxy.jpg") center/cover no-repeat;
+opacity:.55;
+animation:galaxyFlow 25s ease-in-out infinite alternate;
+filter:blur(2px) saturate(1.1);
+}
+
+@keyframes galaxyFlow{
+0%{transform:scale(1.05) translateX(-3%) translateY(-2%)}
+100%{transform:scale(1.2) translateX(3%) translateY(2%)}
+}
+
+.galaxy-overlay{
+position:fixed;
+inset:0;
+z-index:-1;
+background:radial-gradient(circle at center,
+rgba(0,0,0,.2),
+rgba(0,0,0,.65)
+);
+}
+
 /* GRID */
 body::before{
 content:"";
@@ -130,6 +156,9 @@ h1{font-size:2rem}
 </head>
 
 <body>
+
+<div class="galaxy-bg"></div>
+<div class="galaxy-overlay"></div>
 
 <div class="corner-logo">
 <img src="/images/logoLEC.png" alt="Lucy Epoxy Studio logo"
