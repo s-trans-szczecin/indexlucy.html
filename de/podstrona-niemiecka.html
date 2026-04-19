@@ -407,6 +407,44 @@ setTimeout(explode,2500);
 
 window.onload=()=>setTimeout(explode,1200);
 </script>
+<script>
+const nav = document.getElementById("glassNav");
+const items = nav.querySelectorAll("a");
 
+document.addEventListener("mousemove",(e)=>{
+
+const mouseX = e.clientX;
+const mouseY = e.clientY;
+
+const centerX = window.innerWidth/2;
+const centerY = window.innerHeight/2;
+
+/* lekki ruch całego menu */
+const moveX = (mouseX-centerX)*0.01;
+const moveY = (mouseY-centerY)*0.01;
+
+nav.style.transform =
+`translate(${moveX}px,${moveY}px)`;
+
+/* grawitacja CORE */
+items.forEach(el=>{
+
+const rect = el.getBoundingClientRect();
+
+const elX = rect.left + rect.width/2;
+const elY = rect.top + rect.height/2;
+
+const dx = centerX - elX;
+const dy = centerY - elY;
+
+const dist = Math.sqrt(dx*dx + dy*dy);
+
+const force = Math.min(40/dist,0.6);
+
+el.style.transform =
+`translate(${dx*force*0.1}px, ${dy*force*0.1}px)`;
+});
+});
+</script>
 </body>
 </html>
