@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LucyEpoxyStudio</title>
+<title>LucyEpoxyStudio | Epoxidharz Möbel Deutschland</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -14,7 +14,22 @@ body{
 font-family:'Inter',sans-serif;
 background:#050505;
 color:#f4f4f4;
+line-height:1.7;
 overflow-x:hidden;
+position:relative;
+}
+
+/* GRID */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:0;
+background:
+repeating-linear-gradient(90deg, rgba(212,175,55,.06) 0 2px, transparent 2px 30px),
+repeating-linear-gradient(0deg, rgba(212,175,55,.04) 0 2px, transparent 2px 30px);
+opacity:.25;
 }
 
 /* HEADER */
@@ -26,9 +41,17 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:2rem;
+position:relative;
 }
 
-/* TITLE */
+header::before{
+content:"";
+position:absolute;
+inset:0;
+background:radial-gradient(circle at top, rgba(255,255,255,.1), rgba(212,175,55,.25), rgba(0,0,0,.7));
+z-index:-1;
+}
+
 h1{
 font-family:'Playfair Display',serif;
 font-size:clamp(3rem,6vw,4.5rem);
@@ -41,50 +64,67 @@ background:linear-gradient(120deg,#d4af37,#fff2b2,#b08d2f);
 }
 
 .hero-text{
-margin-top:1rem;
-max-width:700px;
+max-width:760px;
+margin-top:1.2rem;
+font-size:1.2rem;
+color:#e0e0e0;
 }
 
 /* BUTTONS */
 .nav-buttons{
 margin-top:2rem;
 display:flex;
-gap:.8rem;
 flex-wrap:wrap;
 justify-content:center;
+gap:.8rem;
 }
 
 .cta{
+display:inline-block;
 padding:1rem 1.7rem;
 border-radius:50px;
 border:1px solid rgba(212,175,55,.6);
+background:rgba(255,255,255,.06);
 color:#f5e6b8;
 text-decoration:none;
+transition:.4s;
 }
 
-/* LOGO - STABLE */
+.cta:hover{
+background:rgba(212,175,55,.25);
+transform:translateY(-4px);
+box-shadow:0 25px 50px rgba(212,175,55,.4);
+}
+
+/* PREMIUM LOGO */
 .corner-logo{
 position:fixed;
 top:14px;
 left:14px;
-width:90px;
-z-index:9999;
+z-index:10001;
+width:100px;
+perspective:1000px;
 }
 
 .corner-logo img{
 width:100%;
 border-radius:12px;
-animation:rotateLogo 10s linear infinite;
+animation:spin 12s linear infinite;
+transition:transform .2s ease-out;
+filter:
+drop-shadow(0 0 10px rgba(212,175,55,.6))
+drop-shadow(0 0 25px rgba(212,175,55,.4))
+drop-shadow(0 8px 18px rgba(0,0,0,.45));
 }
 
-@keyframes rotateLogo{
-from{transform:rotate(0deg);}
-to{transform:rotate(360deg);}
+@keyframes spin{
+0%{transform:rotateY(0deg)}
+100%{transform:rotateY(360deg)}
 }
 
 /* MOBILE */
 @media(max-width:768px){
-.corner-logo{width:65px;top:10px;left:10px}
+.corner-logo{width:70px;top:10px;left:10px}
 header{padding-top:90px}
 h1{font-size:2rem}
 }
@@ -94,24 +134,35 @@ h1{font-size:2rem}
 <body>
 
 <div class="corner-logo">
-<img src="/images/logoLEC.png" alt="logo">
+<img src="/images/logoLEC.png" id="logo" alt="Lucy Epoxy Studio logo">
 </div>
 
 <header>
 <h1><span>Lucy</span>EpoxyStudio</h1>
 
 <p class="hero-text">
-Exklusive Epoxidharz Möbel und Premium Design.
+Exklusive Epoxidharz-Möbel und handgefertigte Premium-Designs für den deutschen Markt.
 </p>
 
 <div class="nav-buttons">
 <a class="cta" href="../index.html">Polska</a>
 <a class="cta" href="../en/index.html">English</a>
-<a class="cta" href="premium-projekt.html">Premium</a>
+<a class="cta" href="premium-projekt.html">Premium Projekt</a>
 <a class="cta" href="kontakt.html">Kontakt</a>
+<a class="cta" href="android-app.html">Android App</a>
+<a class="cta" href="realisierungen.html">Realisierungen</a>
 </div>
-
 </header>
+
+<script>
+const logo = document.getElementById("logo");
+
+window.addEventListener("scroll",()=>{
+let y = window.scrollY;
+logo.style.transform =
+"rotateY(" + (y * 0.2) + "deg) translateY(" + (y * 0.02) + "px)";
+});
+</script>
 
 </body>
 </html>
