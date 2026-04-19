@@ -31,7 +31,7 @@ z-index:1000;
 .corner-logo img{
 width:100%;
 border-radius:12px;
-animation:spinLogo 10s linear infinite;
+animation:spinLogo 12s linear infinite;
 filter:drop-shadow(0 8px 18px rgba(0,0,0,.5));
 }
 
@@ -161,7 +161,7 @@ pointer-events:none;
 
 .supernova.small{width:5px;height:5px}
 .supernova.medium{width:10px;height:10px}
-.supernova.big{width:16px;height:16px;filter:blur(2px)}
+.supernova.big{width:18px;height:18px;filter:blur(2px)}
 
 @keyframes supernovaBurst{
 0%{transform:translate(0,0) scale(.2);opacity:0}
@@ -225,6 +225,10 @@ box-shadow:0 0 25px rgba(212,175,55,0.25);
 
 <body>
 
+<div class="corner-logo">
+<img src="/images/logoLEC.png" alt="logo">
+</div>
+
 <div class="scene">
 <div class="left"></div>
 <div class="right"></div>
@@ -244,14 +248,15 @@ box-shadow:0 0 25px rgba(212,175,55,0.25);
 </div>
 
 <script>
+
 /* CORE FLARES */
-for(let i=0;i<18;i++){
+for(let i=0;i<36;i++){
 const f=document.createElement("div");
 f.className="flare";
 f.style.left=50+Math.random()*10-5+"%";
 f.style.top=50+Math.random()*10-5+"%";
-f.style.setProperty("--x",(Math.random()*200-100)+"px");
-f.style.setProperty("--y",(Math.random()*200-100)+"px");
+f.style.setProperty("--x",(Math.random()*240-120)+"px");
+f.style.setProperty("--y",(Math.random()*240-120)+"px");
 f.style.animationDelay=Math.random()*3+"s";
 document.body.appendChild(f);
 }
@@ -265,14 +270,17 @@ s.className="supernova "+sizes[Math.floor(Math.random()*sizes.length)];
 s.style.left=Math.random()*100+"vw";
 s.style.top=Math.random()*100+"vh";
 
-s.style.setProperty("--x",(Math.random()*400-200)+"px");
-s.style.setProperty("--y",(Math.random()*400-200)+"px");
+s.style.setProperty("--x",(Math.random()*500-250)+"px");
+s.style.setProperty("--y",(Math.random()*500-250)+"px");
 
 document.body.appendChild(s);
 setTimeout(()=>s.remove(),5000);
 }
 
-setInterval(spawnSupernova,900);
+setInterval(()=>{
+spawnSupernova();
+spawnSupernova();
+},600);
 
 /* camera flash near menu */
 function spawnFlash(){
@@ -288,7 +296,8 @@ f.style.top=(rect.top+Math.random()*rect.height)+"px";
 document.body.appendChild(f);
 setTimeout(()=>f.remove(),2800);
 }
-setInterval(()=>{for(let i=0;i<3;i++)spawnFlash()},700);
+
+setInterval(()=>{for(let i=0;i<6;i++)spawnFlash()},450);
 
 /* AI gravity menu */
 const nav=document.getElementById("glassNav");
