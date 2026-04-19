@@ -19,29 +19,67 @@ overflow-x:hidden;
 position:relative;
 }
 
-/* GALAXY BACKGROUND */
-.galaxy-bg{
-position:fixed;
-inset:-20%;
-z-index:-2;
-background:url("/indexlucy.html/public/images/galaxy.png") center/cover no-repeat;
-opacity:.55;
-animation:galaxyFlow 25s ease-in-out infinite alternate;
-filter:blur(2px) saturate(1.1);
-}
-
-@keyframes galaxyFlow{
-0%{transform:scale(1.05) translateX(-3%) translateY(-2%)}
-100%{transform:scale(1.2) translateX(3%) translateY(2%)}
-}
-
-.galaxy-overlay{
+/* ===== GALAXY WOW EFFECT ===== */
+.galaxy-wrap{
 position:fixed;
 inset:0;
-z-index:-1;
+z-index:-3;
+overflow:hidden;
+pointer-events:none;
+}
+
+.galaxy{
+position:absolute;
+top:50%;
+left:50%;
+width:140vw;
+height:140vh;
+background:url("/indexlucy.html/public/images/galaxy.png") center/contain no-repeat;
+transform:translate(-50%,-50%);
+opacity:.9;
+filter:blur(1px) saturate(1.2);
+animation:galaxyRugby 28s ease-in-out infinite alternate;
+}
+
+.galaxy::after{
+content:"";
+position:absolute;
+inset:-20%;
+background:url("/indexlucy.html/public/images/galaxy.png") center/contain no-repeat;
+opacity:.35;
+filter:blur(35px) saturate(1.5);
+animation:galaxyGlow 35s ease-in-out infinite alternate;
+}
+
+@keyframes galaxyRugby{
+0%{
+transform:translate(-50%,-50%) scaleX(1.1) scaleY(.9) rotate(-3deg);
+}
+50%{
+transform:translate(-50%,-50%) scaleX(1.25) scaleY(.85) rotate(2deg);
+}
+100%{
+transform:translate(-50%,-50%) scaleX(1.15) scaleY(.95) rotate(-2deg);
+}
+}
+
+@keyframes galaxyGlow{
+0%{
+transform:scale(1.1);
+}
+100%{
+transform:scale(1.3);
+}
+}
+
+/* subtle dark overlay */
+.galaxy-dark{
+position:fixed;
+inset:0;
+z-index:-2;
 background:radial-gradient(circle at center,
 rgba(0,0,0,.2),
-rgba(0,0,0,.65)
+rgba(0,0,0,.75)
 );
 }
 
@@ -70,14 +108,6 @@ padding:2rem;
 position:relative;
 }
 
-header::before{
-content:"";
-position:absolute;
-inset:0;
-background:radial-gradient(circle at top, rgba(255,255,255,.1), rgba(212,175,55,.25), rgba(0,0,0,.7));
-z-index:-1;
-}
-
 h1{
 font-family:'Playfair Display',serif;
 font-size:clamp(3rem,6vw,4.5rem);
@@ -96,7 +126,6 @@ font-size:1.2rem;
 color:#e0e0e0;
 }
 
-/* BUTTONS */
 .nav-buttons{
 margin-top:2rem;
 display:flex;
@@ -157,8 +186,10 @@ h1{font-size:2rem}
 
 <body>
 
-<div class="galaxy-bg"></div>
-<div class="galaxy-overlay"></div>
+<div class="galaxy-wrap">
+<div class="galaxy"></div>
+</div>
+<div class="galaxy-dark"></div>
 
 <div class="corner-logo">
 <img src="/images/logoLEC.png" alt="Lucy Epoxy Studio logo"
