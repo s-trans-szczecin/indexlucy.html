@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LucyEpoxyStudio | Vision UI System</title>
+<title>LucyEpoxyStudio | Cosmic System</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -18,53 +18,78 @@ height:100vh;
 color:#f4f4f4;
 }
 
+/* ================= LOGO ================= */
+
+.corner-logo{
+position:fixed;
+top:14px;
+left:14px;
+width:100px;
+z-index:1000;
+}
+
+.corner-logo img{
+width:100%;
+border-radius:12px;
+animation:spinLogo 10s linear infinite;
+filter:drop-shadow(0 8px 18px rgba(0,0,0,.5));
+}
+
+@keyframes spinLogo{
+0%{transform:rotateY(0deg)}
+100%{transform:rotateY(360deg)}
+}
+
 /* ================= GALAXY ================= */
 
 .scene{
 position:fixed;
 inset:0;
-z-index:-5;
+z-index:-3;
 }
 
 .left,.right{
 position:absolute;
 top:50%;
 left:50%;
-width:220vw;
-height:220vh;
+width:200vw;
+height:200vh;
 transform:translate(-50%,-50%);
 background-size:contain;
 background-repeat:no-repeat;
 background-position:center;
-filter:blur(1.2px) saturate(1.4);
-opacity:.9;
+filter:blur(1px) saturate(1.3);
 }
 
-.left{background-image:url("/indexlucy.html/public/images/galaxy-left.png");animation:driftL 26s ease-in-out infinite;}
-.right{background-image:url("/indexlucy.html/public/images/galaxy-right.png");animation:driftR 30s ease-in-out infinite;}
+.left{background-image:url("/indexlucy.html/public/images/galaxy-left.png");}
+.right{background-image:url("/indexlucy.html/public/images/galaxy-right.png");}
+
+.left{animation:driftL 22s ease-in-out infinite;}
+.right{animation:driftR 26s ease-in-out infinite;}
 
 @keyframes driftL{
 0%,100%{transform:translate(-50%,-50%) rotate(0deg)}
-50%{transform:translate(-52%,-50%) rotate(-6deg)}
+50%{transform:translate(-52%,-50%) rotate(-5deg)}
 }
 
 @keyframes driftR{
 0%,100%{transform:translate(-50%,-50%) rotate(0deg)}
-50%{transform:translate(-48%,-50%) rotate(6deg)}
+50%{transform:translate(-48%,-50%) rotate(5deg)}
 }
 
-/* ================= CORE (GRAVITY ENGINE) ================= */
+/* ================= CORE ================= */
 
 .core{
 position:absolute;
 top:50%;
 left:50%;
-width:360px;
-height:360px;
+width:340px;
+height:340px;
 transform:translate(-50%,-50%);
 background:url("/indexlucy.html/public/images/galaxy-core.png") center/contain no-repeat;
-animation:coreSpin 18s linear infinite, corePulse 7s ease-in-out infinite;
-filter:drop-shadow(0 0 40px rgba(212,175,55,.3));
+animation:
+coreSpin 16s linear infinite,
+corePulse 6s ease-in-out infinite;
 }
 
 @keyframes coreSpin{
@@ -74,30 +99,29 @@ filter:drop-shadow(0 0 40px rgba(212,175,55,.3));
 
 @keyframes corePulse{
 0%,100%{transform:translate(-50%,-50%) scale(1)}
-50%{transform:translate(-50%,-50%) scale(1.25)}
+50%{transform:translate(-50%,-50%) scale(1.2)}
 }
 
-/* ================= FLARES (IMPORTANT!) ================= */
+/* ================= FLARES / SPARKS ================= */
 
 .flare{
 position:absolute;
 width:6px;
 height:6px;
+background:radial-gradient(circle,#fff2b2,#d4af37,transparent);
 border-radius:50%;
-background:radial-gradient(circle,#fff6c0,#d4af37,transparent);
 filter:blur(1px);
-animation:flareMove 4s ease-in-out infinite;
-opacity:.9;
-mix-blend-mode:screen;
+animation:flareMove 3s infinite ease-in-out;
+opacity:.8;
 }
 
 @keyframes flareMove{
-0%{transform:translate(0,0) scale(.3);opacity:0}
-30%{opacity:1}
-100%{transform:translate(var(--x),var(--y)) scale(2);opacity:0}
+0%{transform:translate(0,0) scale(.5);opacity:0}
+50%{opacity:1}
+100%{transform:translate(var(--x),var(--y)) scale(1.8);opacity:0}
 }
 
-/* ================= VISION PRO GLASS UI ================= */
+/* ================= TEXT ================= */
 
 .hero{
 position:relative;
@@ -108,7 +132,6 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-backdrop-filter:blur(2px);
 }
 
 h1{
@@ -117,41 +140,29 @@ font-size:clamp(2.5rem,6vw,4rem);
 background:linear-gradient(120deg,#d4af37,#fff2b2,#b08d2f);
 -webkit-background-clip:text;
 color:transparent;
-text-shadow:0 0 30px rgba(212,175,55,.15);
-animation:introGlow 6s ease-in-out infinite;
 }
 
-@keyframes introGlow{
-0%,100%{filter:brightness(1)}
-50%{filter:brightness(1.4)}
-}
-
-/* ================= GLASS MENU ================= */
+/* ================= MENU ================= */
 
 .nav{
-margin-top:30px;
+margin-top:25px;
 display:flex;
-gap:12px;
+gap:10px;
 flex-wrap:wrap;
 justify-content:center;
 }
 
 .nav a{
-padding:12px 18px;
-border-radius:18px;
-background:rgba(255,255,255,.06);
-border:1px solid rgba(212,175,55,.25);
-backdrop-filter:blur(14px);
+padding:10px 16px;
+border-radius:30px;
+border:1px solid rgba(212,175,55,.5);
 color:#f5e6b8;
 text-decoration:none;
-transition:.3s;
-box-shadow:0 10px 30px rgba(0,0,0,.3);
+background:rgba(0,0,0,.35);
 }
 
 .nav a:hover{
-transform:translateY(-4px) scale(1.05);
-background:rgba(212,175,55,.18);
-box-shadow:0 0 25px rgba(212,175,55,.4);
+background:rgba(212,175,55,.2);
 }
 
 /* ================= PARTICLES ================= */
@@ -163,8 +174,8 @@ font-size:2rem;
 font-weight:700;
 color:#d4af37;
 pointer-events:none;
-text-shadow:0 0 15px rgba(212,175,55,.9);
-animation:fly 1.8s ease-out forwards;
+text-shadow:0 0 10px rgba(212,175,55,.8);
+animation:fly 1.6s ease-out forwards;
 }
 
 @keyframes fly{
@@ -173,7 +184,7 @@ animation:fly 1.8s ease-out forwards;
 }
 
 .particle.rebuild{
-animation:rebuild 1.5s ease-in forwards !important;
+animation:rebuild 1.4s ease-in forwards !important;
 }
 
 @keyframes rebuild{
@@ -186,23 +197,28 @@ animation:rebuild 1.5s ease-in forwards !important;
 
 <body>
 
-<!-- GALAXY SYSTEM -->
+<!-- LOGO -->
+<div class="corner-logo">
+<img src="/images/logoLEC.png" alt="logo">
+</div>
+
+<!-- GALAXY -->
 <div class="scene">
   <div class="left"></div>
   <div class="right"></div>
   <div class="core"></div>
 </div>
 
-<!-- FLARES ENGINE -->
+<!-- FLARES -->
 <script>
-for(let i=0;i<25;i++){
+for(let i=0;i<18;i++){
 const f=document.createElement("div");
 f.className="flare";
 f.style.left=50+Math.random()*10-5+"%";
 f.style.top=50+Math.random()*10-5+"%";
-f.style.setProperty("--x",(Math.random()*260-130)+"px");
-f.style.setProperty("--y",(Math.random()*260-130)+"px");
-f.style.animationDelay=Math.random()*4+"s";
+f.style.setProperty("--x",(Math.random()*200-100)+"px");
+f.style.setProperty("--y",(Math.random()*200-100)+"px");
+f.style.animationDelay=Math.random()*3+"s";
 document.body.appendChild(f);
 }
 </script>
@@ -222,7 +238,6 @@ document.body.appendChild(f);
 
 </div>
 
-<!-- TEXT + PARTICLE ENGINE -->
 <script>
 const text=document.getElementById("brand");
 let spans=[],particles=[];
@@ -230,7 +245,6 @@ let spans=[],particles=[];
 function explode(){
 const letters=text.innerText.split("");
 text.innerHTML="";
-
 letters.forEach(c=>{
 const s=document.createElement("span");
 s.innerText=c;
@@ -249,12 +263,12 @@ p.className="particle";
 p.innerText=span.innerText;
 
 const a=Math.random()*Math.PI*2;
-const d=70+Math.random()*140;
+const d=60+Math.random()*120;
 
 p.style.left=rect.left+"px";
 p.style.top=rect.top+"px";
 p.style.setProperty("--x",Math.cos(a)*d+"px");
-p.style.setProperty("--y",Math.sin(a)*d-90+"px");
+p.style.setProperty("--y",Math.sin(a)*d-80+"px");
 
 document.body.appendChild(p);
 particles.push(p);
@@ -263,20 +277,20 @@ particles.push(p);
 span.style.opacity="0";
 });
 
-setTimeout(rebuild,2000);
+setTimeout(rebuild,1800);
 });
 }
 
 function rebuild(){
 particles.forEach(p=>{
 p.classList.add("rebuild");
-setTimeout(()=>p.remove(),1500);
+setTimeout(()=>p.remove(),1400);
 });
 
 setTimeout(()=>{
 text.innerHTML="LucyEpoxyStudio";
-setTimeout(explode,3000);
-},1600);
+setTimeout(explode,2500);
+},1500);
 }
 
 window.onload=()=>setTimeout(explode,1200);
