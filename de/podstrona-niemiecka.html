@@ -114,7 +114,6 @@ filter:blur(1px);
 animation:flareMove 3.5s infinite ease-in-out;
 opacity:.85;
 mix-blend-mode:screen;
-will-change:transform,opacity;
 }
 
 @keyframes flareMove{
@@ -221,24 +220,6 @@ transition:transform .2s,box-shadow .3s;
 .nav a:hover{
 box-shadow:0 0 25px rgba(212,175,55,0.25);
 }
-
-/* ================= PARTICLES ================= */
-
-.particle{
-position:absolute;
-font-family:'Playfair Display',serif;
-font-size:2rem;
-font-weight:700;
-color:#d4af37;
-pointer-events:none;
-text-shadow:0 0 10px rgba(212,175,55,.8);
-animation:fly 1.6s ease-out forwards;
-}
-
-@keyframes fly{
-0%{transform:translate(0,0);opacity:1}
-100%{transform:translate(var(--x),var(--y));opacity:0}
-}
 </style>
 </head>
 
@@ -263,6 +244,36 @@ animation:fly 1.6s ease-out forwards;
 </div>
 
 <script>
+/* CORE FLARES */
+for(let i=0;i<18;i++){
+const f=document.createElement("div");
+f.className="flare";
+f.style.left=50+Math.random()*10-5+"%";
+f.style.top=50+Math.random()*10-5+"%";
+f.style.setProperty("--x",(Math.random()*200-100)+"px");
+f.style.setProperty("--y",(Math.random()*200-100)+"px");
+f.style.animationDelay=Math.random()*3+"s";
+document.body.appendChild(f);
+}
+
+/* SUPERNOVA BURSTS */
+function spawnSupernova(){
+const s=document.createElement("div");
+const sizes=["small","medium","big"];
+s.className="supernova "+sizes[Math.floor(Math.random()*sizes.length)];
+
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+
+s.style.setProperty("--x",(Math.random()*400-200)+"px");
+s.style.setProperty("--y",(Math.random()*400-200)+"px");
+
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),5000);
+}
+
+setInterval(spawnSupernova,900);
+
 /* camera flash near menu */
 function spawnFlash(){
 const nav=document.getElementById("glassNav");
