@@ -77,7 +77,7 @@ filter:blur(1px) saturate(1.3);
 50%{transform:translate(-48%,-50%) rotate(5deg)}
 }
 
-/* ================= CORE (ULEPSZONE) ================= */
+/* ================= CORE ================= */
 
 .core{
 position:absolute;
@@ -90,8 +90,6 @@ background:url("/indexlucy.html/public/images/galaxy-core.png") center/contain n
 animation:
 coreSpin 16s linear infinite,
 corePulse 6s ease-in-out infinite;
-filter:drop-shadow(0 0 25px rgba(212,175,55,.25));
-will-change:transform;
 }
 
 @keyframes coreSpin{
@@ -104,7 +102,7 @@ will-change:transform;
 50%{transform:translate(-50%,-50%) scale(1.2)}
 }
 
-/* ================= FLARES (MOCNE ULEPSZENIE) ================= */
+/* ================= FLARES ================= */
 
 .flare{
 position:absolute;
@@ -123,6 +121,48 @@ will-change:transform,opacity;
 0%{transform:translate(0,0) scale(.4);opacity:0}
 30%{opacity:1}
 100%{transform:translate(var(--x),var(--y)) scale(2);opacity:0}
+}
+
+/* ================= SUPER FLARES (NOWE ROZBŁYSKI) ================= */
+
+.super-flare{
+position:absolute;
+width:10px;
+height:10px;
+border-radius:50%;
+background:radial-gradient(circle,
+#fff6c8 0%,
+#ffd36b 25%,
+#d4af37 45%,
+transparent 70%);
+filter:blur(1px);
+mix-blend-mode:screen;
+opacity:0;
+animation:superBurst 4s infinite ease-in-out;
+will-change:transform,opacity;
+}
+
+.super-flare.big{
+width:18px;
+height:18px;
+filter:blur(2px);
+animation-duration:5s;
+}
+
+.super-flare.core{
+background:radial-gradient(circle,
+#ffffff 0%,
+#fff2b2 20%,
+#d4af37 50%,
+transparent 75%);
+box-shadow:0 0 25px rgba(255,210,120,.6);
+}
+
+@keyframes superBurst{
+0%{transform:translate(0,0) scale(.2);opacity:0}
+20%{opacity:1}
+60%{opacity:.8}
+100%{transform:translate(var(--x),var(--y)) scale(2.8);opacity:0}
 }
 
 /* ================= TEXT ================= */
@@ -212,6 +252,7 @@ animation:rebuild 1.4s ease-in forwards !important;
   <div class="core"></div>
 </div>
 
+<!-- FLARES -->
 <script>
 for(let i=0;i<28;i++){
 const f=document.createElement("div");
@@ -223,6 +264,33 @@ f.style.setProperty("--y",(Math.random()*260-130)+"px");
 f.style.animationDelay=Math.random()*4+"s";
 document.body.appendChild(f);
 }
+
+/* ================= SUPER FLARES ================= */
+
+function createSuperFlare(type){
+const f=document.createElement("div");
+
+f.className="super-flare " + type;
+
+const angle=Math.random()*Math.PI*2;
+const distance=80 + Math.random()*220;
+
+f.style.left="50%";
+f.style.top="50%";
+
+f.style.setProperty("--x",Math.cos(angle)*distance+"px");
+f.style.setProperty("--y",Math.sin(angle)*distance+"px");
+
+f.style.animationDelay=Math.random()*3+"s";
+
+document.body.appendChild(f);
+
+setTimeout(()=>f.remove(),5000);
+}
+
+setInterval(()=>createSuperFlare(""),250);
+setInterval(()=>createSuperFlare("big"),900);
+setInterval(()=>createSuperFlare("core"),600);
 </script>
 
 <div class="hero">
