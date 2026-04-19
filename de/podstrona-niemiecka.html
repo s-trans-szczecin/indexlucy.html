@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LucyEpoxyStudio | Cosmic Luxury Core</title>
+<title>LucyEpoxyStudio | Cosmic Rebuild Core</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -13,8 +13,8 @@
 body{
 font-family:'Inter',sans-serif;
 background:#050505;
-height:100vh;
 overflow:hidden;
+height:100vh;
 }
 
 /* ================= SPACE ================= */
@@ -24,8 +24,6 @@ position:fixed;
 inset:0;
 z-index:-2;
 }
-
-/* GALAXY LEFT / RIGHT */
 
 .left,.right{
 position:absolute;
@@ -66,7 +64,6 @@ width:320px;
 height:320px;
 transform:translate(-50%,-50%);
 background:url("/indexlucy.html/public/images/galaxy-core.png") center/contain no-repeat;
-filter:drop-shadow(0 0 90px rgba(0,0,0,.95));
 
 animation:
 coreSpinLeft 14s linear infinite,
@@ -83,76 +80,7 @@ coreFlatten 6s ease-in-out infinite;
 50%{transform:translate(-50%,-50%) scale(1.25,.75)}
 }
 
-/* ================= FLASHES ================= */
-
-.flash,.flash2,.flash3{
-position:absolute;
-top:50%;
-left:50%;
-border-radius:50%;
-opacity:0;
-mix-blend-mode:screen;
-filter:blur(40px);
-transform:translate(-50%,-50%);
-}
-
-.flash{
-width:140px;height:140px;
-background:white;
-animation:flashMain 5s ease-in-out infinite;
-}
-
-.flash2{
-width:220px;height:220px;
-background:rgba(255,255,255,.5);
-animation:flash2 7s ease-in-out infinite;
-}
-
-.flash3{
-width:320px;height:320px;
-background:rgba(212,175,55,.3);
-animation:flash3 9s ease-in-out infinite;
-}
-
-@keyframes flashMain{
-0%,85%,100%{opacity:0}
-87%{opacity:1}
-90%{opacity:.2}
-}
-
-@keyframes flash2{
-0%,80%,100%{opacity:0}
-82%{opacity:.6}
-88%{opacity:0}
-}
-
-@keyframes flash3{
-0%,88%,100%{opacity:0}
-90%{opacity:.4}
-92%{opacity:0}
-}
-
-/* ================= LOGO ================= */
-
-.logo{
-position:fixed;
-top:14px;
-left:14px;
-width:100px;
-z-index:1000;
-}
-
-.logo img{
-width:100%;
-animation:spin 8s linear infinite;
-}
-
-@keyframes spin{
-0%{transform:rotateY(0)}
-100%{transform:rotateY(360deg)}
-}
-
-/* ================= HERO ================= */
+/* ================= TEXT ================= */
 
 .hero{
 position:relative;
@@ -160,77 +88,54 @@ z-index:2;
 height:100vh;
 display:flex;
 flex-direction:column;
-align-items:center;
 justify-content:center;
+align-items:center;
 text-align:center;
 }
 
-/* GOLD TEXT */
 h1{
 font-family:'Playfair Display';
-font-size:clamp(3rem,6vw,4rem);
-position:relative;
-display:inline-block;
-color:transparent;
+font-size:clamp(2.5rem,6vw,4rem);
 background:linear-gradient(120deg,#d4af37,#fff2b2,#b08d2f);
 -webkit-background-clip:text;
-}
-
-/* sparkles */
-h1::before,
-h1::after{
-content:"";
-position:absolute;
-inset:-30px;
-background:
-radial-gradient(circle at 20% 30%,white,transparent 5px),
-radial-gradient(circle at 70% 60%,white,transparent 4px),
-radial-gradient(circle at 40% 80%,white,transparent 3px);
-opacity:.7;
-animation:sparkle 3s infinite alternate;
-pointer-events:none;
-}
-
-@keyframes sparkle{
-0%{opacity:.3;transform:scale(1)}
-100%{opacity:1;transform:scale(1.1)}
-}
-
-/* NAV */
-.nav{
-margin-top:20px;
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-justify-content:center;
-}
-
-.nav a{
-padding:10px 16px;
-border-radius:30px;
-border:1px solid rgba(212,175,55,.5);
-color:#f5e6b8;
-text-decoration:none;
-background:rgba(0,0,0,.35);
-backdrop-filter:blur(8px);
+color:transparent;
+position:relative;
 }
 
 /* ================= PARTICLES ================= */
 
 .particle{
 position:absolute;
-pointer-events:none;
 font-family:'Playfair Display',serif;
 font-size:2rem;
 font-weight:700;
 color:#d4af37;
-animation:fly 1.6s ease-out forwards;
+pointer-events:none;
 text-shadow:0 0 10px rgba(212,175,55,.8);
+animation:fly 1.6s ease-out forwards;
+will-change:transform,opacity;
 }
 
 @keyframes fly{
 0%{transform:translate(0,0) scale(1);opacity:1}
 100%{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}
+}
+
+/* ================= REBUILD MODE ================= */
+
+.particle.rebuild{
+animation:rebuild 1.4s ease-in forwards !important;
+}
+
+@keyframes rebuild{
+0%{
+transform:translate(var(--x),var(--y)) scale(.2);
+opacity:0;
+}
+100%{
+transform:translate(0,0) scale(1);
+opacity:1;
+}
 }
 
 </style>
@@ -241,52 +146,44 @@ text-shadow:0 0 10px rgba(212,175,55,.8);
 <div class="scene">
   <div class="left"></div>
   <div class="right"></div>
-
-  <div class="flash"></div>
-  <div class="flash2"></div>
-  <div class="flash3"></div>
-
   <div class="core"></div>
-</div>
-
-<div class="logo">
-<img src="/images/logoLEC.png">
 </div>
 
 <div class="hero">
 <h1 id="brand">LucyEpoxyStudio</h1>
-
-<div class="nav">
-<a href="../index.html">PL</a>
-<a href="../en/index.html">EN</a>
-<a href="realisierungen.html">Projects</a>
-<a href="kontakt.html">Contact</a>
-</div>
-
 </div>
 
 <script>
 const text = document.getElementById("brand");
 
-function explodeText(){
+let spans = [];
+let particles = [];
+
+function explode(){
 
 const letters = text.innerText.split("");
 text.innerHTML = "";
 
 letters.forEach((char,i)=>{
 
-const span = document.createElement("span");
-span.innerText = char;
+const span=document.createElement("span");
+span.innerText=char;
 text.appendChild(span);
 
-setTimeout(()=>{
+});
+
+requestAnimationFrame(()=>{
+
+spans = text.querySelectorAll("span");
+
+spans.forEach((span,i)=>{
 
 const rect = span.getBoundingClientRect();
 
 for(let j=0;j<2;j++){
-const p = document.createElement("div");
+const p=document.createElement("div");
 p.className="particle";
-p.innerText=char;
+p.innerText=span.innerText;
 
 const angle=Math.random()*Math.PI*2;
 const dist=50+Math.random()*120;
@@ -297,19 +194,50 @@ p.style.setProperty("--x",Math.cos(angle)*dist+"px");
 p.style.setProperty("--y",Math.sin(angle)*dist-80+"px");
 
 document.body.appendChild(p);
-setTimeout(()=>p.remove(),1600);
+particles.push(p);
 }
 
 span.style.opacity="0";
 
-}, i*120);
+});
+
+setTimeout(rebuild,1800);
 
 });
 
 }
 
+function rebuild(){
+
+particles.forEach((p,i)=>{
+
+p.classList.remove("particle");
+p.classList.add("rebuild");
+
+setTimeout(()=>{
+
+if(spans[i]){
+spans[i].style.opacity="1";
+}
+
+p.remove();
+
+},1400);
+
+});
+
+setTimeout(()=>{
+
+text.innerHTML = "LucyEpoxyStudio";
+
+setTimeout(explode,2500);
+
+},1500);
+
+}
+
 window.addEventListener("load",()=>{
-setTimeout(explodeText,1200);
+setTimeout(explode,1200);
 });
 </script>
 
