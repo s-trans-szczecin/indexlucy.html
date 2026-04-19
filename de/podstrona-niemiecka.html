@@ -249,5 +249,39 @@ corePulse 10s ease-in-out infinite;
 transition:none;
 }
 
+}<style>
+...
+/* wszystkie Twoje style */
+
+/* ⬇️ TO WKLEJ NA SAM KONIEC TEGO BLOKU */
+@media (max-width:768px){
+
+.scene{
+transform:scale(1.05);
 }
+
+.left,.right{
+width:160vw;
+height:160vh;
+filter:blur(0.8px) saturate(1.15);
+}
+
+@keyframes driftL{
+0%,100%{transform:translate(-50%,-50%) rotate(0deg)}
+50%{transform:translate(-50.8%,-50%) rotate(-1deg)}
+}
+
+@keyframes driftR{
+0%,100%{transform:translate(-50%,-50%) rotate(0deg)}
+50%{transform:translate(-49.2%,-50%) rotate(1deg)}
+}
+
+.core{
+animation:
+coreSpin 45s linear infinite,
+corePulse 8s ease-in-out infinite;
+}
+}
+
+</style>
 </style>
