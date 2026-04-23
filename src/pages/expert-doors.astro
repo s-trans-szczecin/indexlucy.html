@@ -1,0 +1,126 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import OrbitGarageLogo from '../components/OrbitGarageLogo.astro';
+
+const googleScriptUrl =
+  'https://script.google.com/macros/s/AKfycbw6MhZjEccZ3NfuNFBONuZcRl0MiJLVPVe4I7QfxmhPilPPYY99BjqWfgq6_gZ0yIO0/exec';
+---
+
+<MainLayout
+  title="Expert Doors | Montaż drzwi i bram garażowych"
+  description="Expert Doors: montaż drzwi i bram garażowych w Szczecinie i okolicach. Zobacz ofertę usług, cennik i pobierz aplikację Android."
+>
+  <header>
+    <div class="container nav">
+      <div class="brand">Expert <span>Doors</span></div>
+      <a href="/pobierz-aplikacje" class="btn secondary">Pobierz aplikację</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="start">
+      <div>
+        <h1>Kompleksowy montaż drzwi i bram garażowych</h1>
+        <p class="lead">
+          Działamy w Szczecinie i okolicach. Realizujemy pomiar, doradztwo, dostawę, montaż i
+          serwis drzwi oraz bram garażowych dla klientów indywidualnych i firm.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#formularz">Wyślij zlecenie online</a>
+          <a class="btn secondary" href="/oferta-cenowa">Oferta cenowa</a>
+        </div>
+      </div>
+      <OrbitGarageLogo />
+    </section>
+
+    <section id="oferta">
+      <h2 class="section-title">Nasze podstrony usług</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Drzwi wejściowe</h3>
+          <p>Montaż drzwi stalowych, aluminiowych i antywłamaniowych.</p>
+          <a class="btn secondary" href="/drzwi-wejsciowe">Zobacz usługę</a>
+        </article>
+        <article class="card">
+          <h3>Drzwi segmentowe</h3>
+          <p>Nowoczesne bramy segmentowe z automatyką i bezpieczeństwem.</p>
+          <a class="btn secondary" href="/drzwi-segmentowe">Zobacz usługę</a>
+        </article>
+        <article class="card">
+          <h3>Drzwi wewnętrzne</h3>
+          <p>Ościeżnice, skrzydła, regulacja i estetyczne wykończenie.</p>
+          <a class="btn secondary" href="/drzwi-wewnetrzne">Zobacz usługę</a>
+        </article>
+        <article class="card">
+          <h3>Automatyka bram</h3>
+          <p>Napędy, piloty, czujniki bezpieczeństwa i konfiguracja sterowań.</p>
+          <a class="btn secondary" href="/automatyka-bram">Zobacz usługę</a>
+        </article>
+        <article class="card">
+          <h3>Serwis i regulacje</h3>
+          <p>Przeglądy okresowe, awarie i precyzyjna regulacja mechaniki.</p>
+          <a class="btn secondary" href="/serwis-i-regulacje">Zobacz usługę</a>
+        </article>
+        <article class="card">
+          <h3>Montaż i pomiar</h3>
+          <p>Dokładny pomiar na miejscu i profesjonalny montaż zgodny z normami.</p>
+          <a class="btn secondary" href="/montaz-i-pomiar">Zobacz usługę</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="realizacje">
+      <h2 class="section-title">Przykładowe realizacje (placeholdery)</h2>
+      <div class="gallery">
+        <img src="/images/expert-doors/gallery-1.svg" alt="Realizacja 1" loading="lazy" />
+        <img src="/images/expert-doors/gallery-2.svg" alt="Realizacja 2" loading="lazy" />
+        <img src="/images/expert-doors/gallery-3.svg" alt="Realizacja 3" loading="lazy" />
+        <img src="/images/expert-doors/gallery-4.svg" alt="Realizacja 4" loading="lazy" />
+        <img src="/images/expert-doors/gallery-5.svg" alt="Realizacja 5" loading="lazy" />
+        <img src="/images/expert-doors/gallery-6.svg" alt="Realizacja 6" loading="lazy" />
+      </div>
+    </section>
+
+    <section id="formularz">
+      <div class="panel">
+        <h2 class="section-title">Formularz zlecenia</h2>
+        <p>Formularz wysyła dane do Google Apps Script.</p>
+        <form method="POST" action={googleScriptUrl}>
+          <label>Imię i nazwisko <input name="name" type="text" required /></label>
+          <label>Telefon <input name="phone" type="tel" required /></label>
+          <label>
+            Lokalizacja realizacji
+            <input name="location" type="text" value="Szczecin i okolice" required />
+          </label>
+          <label>
+            Zakres usługi
+            <select name="service" required>
+              <option value="">Wybierz usługę</option>
+              <option>Montaż drzwi wejściowych</option>
+              <option>Montaż drzwi segmentowych</option>
+              <option>Montaż drzwi wewnętrznych</option>
+              <option>Automatyka bram</option>
+              <option>Serwis i regulacje</option>
+              <option>Montaż i pomiar</option>
+            </select>
+          </label>
+          <label>
+            Opis zlecenia
+            <textarea name="message" placeholder="Napisz czego potrzebujesz" required></textarea>
+          </label>
+          <button type="submit" class="btn primary">Wyślij zlecenie</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Expert Doors · Szczecin i okolice · Montaż drzwi i bram garażowych
+      <div class="cta-row" style="margin-top:.8rem;">
+        <a class="btn secondary" href="/polityka-prywatnosci">Polityka prywatności</a>
+        <a class="btn secondary" href="/regulamin">Regulamin</a>
+      </div>
+    </div>
+  </footer>
+</MainLayout>
